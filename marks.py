@@ -12,7 +12,7 @@ print("Total marks:",total)
 print("Percentage:",percentege)
 
 if percentege>=75:
-  print("Result:Distinction")
+  print("Result:Distinction") #comment
 elif percentege >=60:
   print("Result:First class")
 elif percentege >=45:
