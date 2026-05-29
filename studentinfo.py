@@ -1,0 +1,8 @@
+print("***********Enetr student info***********")
+Roll_no = int(input("Enter student Roll no"))
+student_name = input("Enter Student name")
+Student_marks = float(input("Enter Student percentage"))
+print("***************Student info***********")
+print("Student Roll no=",Roll_no)
+print("Student Name=",student_name)
+print("student marks=",Student_marks)
