@@ -1,0 +1,6 @@
+{
+"emmet.excludedLanguages":
+["html"],
+"editor.formatOnType":false,
+"editor.formatOnSave":false
+}
