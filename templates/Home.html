@@ -1,12 +1,35 @@
 {% extends 'base.html' %}
-{% block title %} Home - College Portal {% endblock %}
+{% block title %} Home - Coaching Student {% endblock %}
 {% block content %}
-<h1> Welcome to College Portal</h1>
-<p>Total students:  {{students|length}}</p>
-<h2> Quick Stats</h2>
+<center>><h1> Welcome to Coaching Class</h1></center>
+
+<div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="row"></div>
+  <div class="card-header">Parhad classes</div>
+  <div class="card-body">
+    <h5 class="card-title">Our coaching class</h5>
+    <p class="card-text">A coaching class is an educational 
+            program designed to provide focused, supplemental instruction in a specific subject 
+            or competitive exam.</p>
+  </div>
+</div>
+<div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="row"></div>
+  <div class="card-header">Parhad classes</div>
+  <div class="card-body">
+    <h5 class="card-title">Our coaching class</h5>
+    <p class="card-text">A coaching class is an educational 
+            program designed to provide focused, supplemental instruction in a specific subject 
+            or competitive exam.</p>
+  </div>
+</div>
+
+<h2><p>Total students:  {{students|length}}</p></h2>
+<h2> Quick Status</h2>               
 <ul>
     {% for student in students %}
         <li>
+            <h3>
             {{ student.name }} - 
             {{ student.marks }} marks -
             {% if student.marks >= 90 %}
@@ -18,7 +41,9 @@
             {% else %}
                 Needs Improvement
             {% endif %}
+        </h3>
         </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+    <center><h2><a href="/students" class="btn btn-dark">Go to Student page </a></center></h2>
 {% endblock %}

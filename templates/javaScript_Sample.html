@@ -1,0 +1,17 @@
+<html>
+  <body>
+        <h1 id="Myheading">Hello</h1>
+        <button id="Mybutton">Click me</button>
+        <script>
+            //Step 1 take the element bi id 
+            const heading=document.getElementById("Myheading");
+            //document-reperesents the whole html page
+            //getElementByid-the id of the element want to select
+            const button=document.getElementById("Mybutton");
+            button.addEventListener('click',function(){
+                heading.textContent="Welcome to JavaScript";
+            });
+        </Script> 
+
+    </body>
+    </html>

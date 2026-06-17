@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} Students - College Portal {% endblock %}
+{% block title %} Students - Coching student {% endblock %}
 
 {% block content %}
 <h1> All Students</h1>
 <p> Total : {{students|length}} students</p>
-
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+  </div>
+</div>
 <table border="1">
     <tr>
         <th>Name</th>
@@ -30,5 +35,7 @@
         </td>
     </tr>
     {% endfor %}
+   
 </table>
+<center><h2><a href="/about" class="btn btn-dark">Go to Next</a></center></h2>
 {% endblock %}
