@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">📝 Student Admission Form</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label>Name *</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Phone *</label>
+            <input type="tel" name="phone" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label>Batch *</label>
+            <select name="batch" class="form-select" required>
+                <option value="JEE 2026">JEE 2026</option>
+                <option value="NEET 2026">NEET 2026</option>
+                <option value="MHT-CET 2026">MHT-CET 2026</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Subjects *</label>
+            <input type="text" name="subjects" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Total Fee</label>
+            <input type="number" name="total_fee" class="form-control" value="0">
+        </div>
+        <div class="mb-3">
+            <label>Paid Fee</label>
+            <input type="number" name="paid_fee" class="form-control" value="0">
+        </div>
+        <button type="submit" class="btn btn-dark">Submit Admission</button>
+    </form>
+</div>
+{% endblock %}

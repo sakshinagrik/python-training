@@ -1,49 +1,57 @@
-{% extends 'base.html' %}
-{% block title %} Home - Coaching Student {% endblock %}
+{% extends "base.html" %}
+
 {% block content %}
-<center>><h1> Welcome to Coaching Class</h1></center>
+<!-- Page chya beech madhe box aanaycha code -->
+<div class="container mt-5">
+    <div class="row align-items-center">
 
-<div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
-    <div class="row"></div>
-  <div class="card-header">Parhad classes</div>
-  <div class="card-body">
-    <h5 class="card-title">Our coaching class</h5>
-    <p class="card-text">A coaching class is an educational 
-            program designed to provide focused, supplemental instruction in a specific subject 
-            or competitive exam.</p>
-  </div>
-</div>
-<div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
-    <div class="row"></div>
-  <div class="card-header">Parhad classes</div>
-  <div class="card-body">
-    <h5 class="card-title">Our coaching class</h5>
-    <p class="card-text">A coaching class is an educational 
-            program designed to provide focused, supplemental instruction in a specific subject 
-            or competitive exam.</p>
-  </div>
-</div>
+        <!-- Left Side -->
+        <div class="col-md-3 "   style="background-color:#1c373d">
+            <div class="card text-center  shadow p-5 mb-4 mt-4" style="background-color:#acdbe7">
+                <h4>📚 Expert Teachers</h4>
+                <p>Experienced Faculty</p>
+            </div>
 
-<h2><p>Total students:  {{students|length}}</p></h2>
-<h2> Quick Status</h2>               
-<ul>
-    {% for student in students %}
-        <li>
-            <h3>
-            {{ student.name }} - 
-            {{ student.marks }} marks -
-            {% if student.marks >= 90 %}
-                Excellent
-            {% elif student.marks >= 75 %}
-                Good
-            {% elif student.marks >= 60 %}
-                Average
-            {% else %}
-                Needs Improvement
-            {% endif %}
-        </h3>
-        </li>
-        {% endfor %}
-    </ul>
-    <center><h2><a href="/students" class="btn btn-dark">Go to Student page </a></center></h2>
+            <div class="card text-center shadow p-5 mb-4 " style="background-color:#acdbe7">
+                <h4>🏆 Best Results</h4>
+                <p>Top Student Performance</p>
+            </div>
+        </div>
+
+        <!-- Center Welcome Card -->
+        <div class="col-md-6">
+            <div class="card text-center shadow-lg p-5"
+                 style="border-radius:20px; background-color:#91d4e4;">
+                <div class="card-body">
+                    <h1 class="card-title display-4 fw-bold">
+                        🎓 Welcome to Our Coaching Class 📚
+                    </h1>
+
+                    <p class="card-text fs-5 text-secondary">
+                        Your success is our mission. Let's learn together!
+                    </p>
+
+                    <a href="{{ url_for('students') }}"
+                       class="btn btn-primary btn-lg mt-3">
+                        View Our Students
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-md-3" style="background-color:#1c373d">
+            <div class="card text-center shadow p-5 mb-4 mt-4" style="background-color:#acdbe7">
+                <h4>📝 Daily Tests</h4>
+                <p>Regular Practice</p>
+            </div>
+
+            <div class="card text-center shadow p-5 mb-4" style="background-color:#acdbe7">
+                <h4>👨‍🏫 Personal Guidance</h4>
+                <p>Individual Attention</p>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}
