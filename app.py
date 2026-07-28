@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for,flash,session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.utils import secure_filename
+import os
 
-apna_nam = Flask(__name__)
+app = Flask(__name__)
+app.secret_key = 'sakshi123'
 
-apna_nam.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coaching.db'
-db = SQLAlchemy(apna_nam)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coaching.db'
+db = SQLAlchemy(app)
 
 # Tujhi juni list - Student.html sathi
 stud = [
@@ -19,6 +22,7 @@ class Student(db.Model):
     name = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(100))
+    photo = db.Column(db.String(100))
     batch = db.Column(db.String(50), nullable=False)
     subjects = db.Column(db.String(200), nullable=False)
     total_fee = db.Column(db.Integer, default=0)
@@ -28,39 +32,137 @@ class Student(db.Model):
     @property
     def pending_fee(self):
         return self.total_fee - self.paid_fee
-
+class Admin(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
 # Tujhe Junne Routes - Ashech Rahu De
-@apna_nam.route('/')
+@app.route('/')
 def home():
     return render_template('Home.html')
 
-@apna_nam.route('/about')
+@app.route('/about')
 def about():
     return render_template('About.html')
 
-@apna_nam.route('/students')
+@app.route('/students')
 def students():
-    # Ithe 'stud' list jatiye. Nanter DB varun daakhavu
     return render_template('Student.html', stud=stud)
-
 # Navin Route - Admission Form
-@apna_nam.route('/admission', methods=['GET', 'POST'])
+@app.route('/student_list')
+def student_list():
+    print(session)
+    if "user" not in session:
+       flash("Please Login First", "warning")
+       return redirect(url_for('login'))
+    search = request.args.get("search")
+
+    if search:
+       students = Student.query.filter(Student.name.contains(search) ).all()
+    else:
+       students = Student.query.all()
+
+    return render_template( "student_list.html",students=students,search=search)
+
+@app.route('/search_students')
+def search_students():
+
+    if "user" not in session:
+        return jsonify([])
+
+    search = request.args.get("search", "")
+
+    if search:
+        students = Student.query.filter(
+            Student.name.ilike(f"%{search}%")
+        ).all()
+    else:
+        students = Student.query.all()
+
+    data = []
+
+    for s in students:
+        data.append({
+            "id": s.id,
+            "name": s.name,
+            "phone": s.phone,
+            "email": s.email,
+            "batch": s.batch,
+            "subjects": s.subjects,
+            "total_fee": s.total_fee,
+            "paid_fee": s.paid_fee
+        })
+
+    return jsonify(data)
+
+@app.route('/admission', methods=['GET', 'POST'])
 def admission():
+    
+    print(dict(session))
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
     if request.method == 'POST':
+        photo = request.files['photo']
+
+        filename = secure_filename(photo.filename)
+
+        photo.save(os.path.join("static/uploads", filename))
         new_student = Student(
+
             name=request.form['name'],
             phone=request.form['phone'],
+            photo=filename,
             email=request.form['email'],
             batch=request.form['batch'],
             subjects=request.form['subjects'],
-            total_fee=int(request.form['total_fee']),
-            paid_fee=int(request.form['paid_fee'])
+            total_fee=int(request.form['total_fee'] or 0),
+            paid_fee=int(request.form['paid_fee'] or 0)
         )
         db.session.add(new_student)
         db.session.commit()
-        return render_template('admission_success.html', name=request.form['name'])
-    
-    return render_template('Admission.html')
+        return redirect(url_for('student_list'))
 
-if __name__ == '__main__':
-    apna_nam.run(debug=True)
+    return render_template("Admission.html")
+@app.route('/edit/<int:id>')
+def edit_student(id):
+    student = Student.query.get_or_404(id)
+    return render_template("Admission.html", student=student)
+@app.route('/delete/<int:id>')
+def delete_student(id):
+    student = Student.query.get_or_404(id)
+    db.session.delete(student)
+    db.session.commit()
+    return redirect('/student_list')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        flash("✅ Login Successful!", "success")
+        session['user']="test"
+        return redirect(url_for('home'))
+
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+
+    if request.method == 'POST':
+        flash("✅ Registration Successful!", "success")
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash("Logout Successful!", "success")
+    return redirect(url_for('login'))
+print(app.url_map)
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
