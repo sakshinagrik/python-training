@@ -1,0 +1,402 @@
+{% extends 'base.html' %}
+{% block title %}AI Coaching Quiz{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white text-center">
+
+            <h2>🤖 AI Coaching Quiz</h2>
+
+            <p class="mb-0">
+                Generate Exam Wise AI Quiz
+            </p>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-8">
+
+                    <label class="form-label fw-bold">
+                        Select Target Exam
+                    </label>
+
+                    <select class="form-select mb-4" id="exam">
+
+                        <option value="">
+                            -- Select Exam --
+                        </option>
+
+                        <option value="JEE">
+                            JEE
+                        </option>
+
+                        <option value="NEET">
+                            NEET
+                        </option>
+
+                        <option value="MHT-CET">
+                            MHT-CET
+                        </option>
+
+                        <option value="HSC">
+                            HSC
+                        </option>
+
+                    </select>
+
+                    <div class="text-center">
+
+                        <button
+                            class="btn btn-primary btn-lg"
+                            id="generateQuiz">
+
+                            🤖 Generate AI Quiz
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr class="mt-4">
+
+            <div id="quizContainer">
+
+            </div>
+
+            <div class="text-center mt-4">
+
+                <a href="{{ url_for('ai_assistant') }}"
+                   class="btn btn-secondary">
+
+                    ⬅️ Back to AI Assistant
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const quizzes = {
+    "JEE":[
+
+{
+question:"Which exam is conducted for Engineering admission?",
+options:["JEE","NEET","MHT-CET","UPSC"],
+answer:"JEE"
+},
+
+{
+question:"Who conducts JEE Main?",
+options:["NTA","UPSC","CBSE","MPSC"],
+answer:"NTA"
+},
+
+{
+question:"Which subject is NOT included in JEE?",
+options:["Physics","Chemistry","Mathematics","Biology"],
+answer:"Biology"
+},
+
+{
+question:"Full form of IIT?",
+options:[
+"Indian Institute of Technology",
+"International Institute of Technology",
+"Indian Information Technology",
+"Institute of Technical Training"
+],
+answer:"Indian Institute of Technology"
+},
+
+{
+question:"Best habit for JEE preparation?",
+options:[
+"Daily Practice",
+"Only Last Day Study",
+"No Revision",
+"Skip Mock Tests"
+],
+answer:"Daily Practice"
+}
+
+],
+
+"NEET":[
+
+{
+question:"NEET is mainly for?",
+options:[
+"Medical Admission",
+"Engineering",
+"Law",
+"MBA"
+],
+answer:"Medical Admission"
+},
+
+{
+question:"Who conducts NEET?",
+options:[
+"NTA",
+"UPSC",
+"SSC",
+"CBSE"
+],
+answer:"NTA"
+},
+
+{
+question:"Which subject is most important for NEET?",
+options:[
+"Biology",
+"History",
+"Economics",
+"Computer"
+],
+answer:"Biology"
+},
+
+{
+question:"Full form of MBBS?",
+options:[
+"Bachelor of Medicine Bachelor of Surgery",
+"Medical Bachelor Board Study",
+"Master of Biology",
+"None"
+],
+answer:"Bachelor of Medicine Bachelor of Surgery"
+},
+
+{
+question:"Best habit for NEET?",
+options:[
+"Daily Revision",
+"No Notes",
+"Skip Practice",
+"Only Reading"
+],
+answer:"Daily Revision"
+}
+
+],
+"MHT-CET":[
+
+{
+question:"MHT-CET is mainly for?",
+options:[
+"Maharashtra Engineering & Pharmacy Admission",
+"Medical Only",
+"UPSC",
+"Bank Exam"
+],
+answer:"Maharashtra Engineering & Pharmacy Admission"
+},
+
+{
+question:"Who conducts MHT-CET?",
+options:[
+"State CET Cell",
+"NTA",
+"UPSC",
+"CBSE"
+],
+answer:"State CET Cell"
+},
+
+{
+question:"Which subjects are compulsory for PCM students?",
+options:[
+"Physics, Chemistry, Mathematics",
+"Biology, History, English",
+"Commerce, Maths",
+"Economics, Physics"
+],
+answer:"Physics, Chemistry, Mathematics"
+},
+
+{
+question:"Mock Tests are?",
+options:[
+"Very Important",
+"Not Useful",
+"Waste of Time",
+"Optional"
+],
+answer:"Very Important"
+},
+
+{
+question:"Best way to improve CET score?",
+options:[
+"Daily Practice",
+"Only Reading",
+"No Revision",
+"Guess Answers"
+],
+answer:"Daily Practice"
+}
+
+],
+
+"HSC":[
+
+{
+question:"HSC stands for?",
+options:[
+"Higher Secondary Certificate",
+"High School Course",
+"Higher Study Class",
+"None"
+],
+answer:"Higher Secondary Certificate"
+},
+
+{
+question:"Which board conducts Maharashtra HSC?",
+options:[
+"MSBSHSE",
+"CBSE",
+"ICSE",
+"NTA"
+],
+answer:"MSBSHSE"
+},
+
+{
+question:"Previous year papers are?",
+options:[
+"Very Useful",
+"Not Useful",
+"Never Solve",
+"Optional"
+],
+answer:"Very Useful"
+},
+
+{
+question:"Best study habit?",
+options:[
+"Daily Study",
+"Study only before Exam",
+"No Notes",
+"Skip Classes"
+],
+answer:"Daily Study"
+},
+
+{
+question:"Internal Assessment helps in?",
+options:[
+"Final Marks",
+"Driving License",
+"Passport",
+"Nothing"
+],
+answer:"Final Marks"
+}
+
+]
+
+};
+document.getElementById("generateQuiz").addEventListener("click", function () {
+
+    let exam = document.getElementById("exam").value;
+
+    if(exam==""){
+        alert("Please Select Target Exam");
+        return;
+    }
+
+    let quiz = quizzes[exam];
+
+    let html = "";
+
+    quiz.forEach(function(q,index){
+
+        html += `
+        <div class="card mt-4 shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Question ${index+1}</h5>
+
+                <p>${q.question}</p>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q${index}" value="${q.options[0]}">
+                    <label class="form-check-label">${q.options[0]}</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q${index}" value="${q.options[1]}">
+                    <label class="form-check-label">${q.options[1]}</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q${index}" value="${q.options[2]}">
+                    <label class="form-check-label">${q.options[2]}</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q${index}" value="${q.options[3]}">
+                    <label class="form-check-label">${q.options[3]}</label>
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+    html += `
+
+    <div class="text-center mt-4">
+
+        <button class="btn btn-success btn-lg" onclick="checkQuiz()">
+            Submit Quiz
+        </button>
+
+    </div>
+
+    <div id="result" class="text-center mt-4"></div>
+
+    `;
+
+    document.getElementById("quizContainer").innerHTML = html;
+
+});
+
+function checkQuiz(){
+
+    document.getElementById("result").innerHTML=`
+    <div class="alert alert-success">
+
+    <h3>🎉 Quiz Submitted Successfully</h3>
+
+    <h4>🤖 AI Feedback</h4>
+
+    <p>Excellent! Keep Practicing Daily.</p>
+
+    </div>
+    `;
+
+}
+</script>
+{% endblock %}

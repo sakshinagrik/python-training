@@ -1,5 +1,5 @@
 coaching_info = {
-    "name": "Parhad Classes",
+    "name": "Apex Academy",
     "city": "Pune",
     "course": "python",
     "Teacher": "Parhad Sir",

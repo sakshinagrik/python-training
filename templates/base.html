@@ -21,8 +21,10 @@
                
                 <a href="{{ url_for('home') }}" class="nav-item nav-link {% if request.endpoint == 'home' %}active fw-bold{% endif %}">🏠&nbsp; Home</a>
                 <a href="{{ url_for('about') }}" class="nav-item nav-link {% if request.endpoint == 'about' %}active fw-bold{% endif %}">😎&nbsp; About us</a>
+              
 
                 <a href="{{ url_for('students') }}" class="nav-item nav-link {% if request.endpoint == 'students' %}active fw-bold{% endif %}">👥&nbsp; Topper Students</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('ai_assistant') }}"> 🤖 AI Assistant</a></li>
                  <a href="{{ url_for('admission') }}" class="nav-item nav-link {% if request.endpoint == 'admission' %}active fw-bold{% endif %}">📝 New Admission</a>
                 
                     <a href="{{ url_for('student_list') }}" class="nav-item nav-link {% if request.endpoint == 'home' %}active fw-bold{% endif %}">🧑‍🎓&nbsp; Student List</a>

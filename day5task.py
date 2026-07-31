@@ -5,7 +5,7 @@ app = Flask(__name__)
 def home():
     return '''
     <h1>Coaching Class Manager</h1>
-    <h2>Welcome to Parhad Classes</h2>
+    <h2>Welcome to Apex Academy</h2>
     <p>This project manages coaching class student records.</p>
 
     <h3>Available Pages</h3>

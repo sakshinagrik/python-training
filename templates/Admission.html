@@ -6,15 +6,15 @@
     enctype="multipart/form-data">
         <div class="mb-3">
             <label>Name *</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" value="{{ student.name if student else '' }}" required>
         </div>
         <div class="mb-3">
             <label>Phone *</label>
-            <input type="tel" name="phone" class="form-control" required>
+            <input type="tel" name="phone" class="form-control" value="{{ student.phone if student else '' }}" required>
         </div>
         <div class="mb-3">
             <label>Email</label>
-            <input type="email" name="email" class="form-control">
+            <input type="email" name="email" class="form-control " value="{{student.email if student else '' }}" required>
         </div>
         <div class="mb-3">
           <label class="form-label">Student Photo</label>
@@ -24,22 +24,34 @@
             <label>Batch *</label>
             <select name="batch" id="batch" class="form-select" required onchange="setFee()">
     <option value="">Select Batch</option>
-    <option value="JEE">JEE 2026 Service</option>
-    <option value="NEET">NEET 2026 Service</option>
-    <option value="MHTCET">MHTCET 2026 Service</option>
+
+    <option value="JEE"
+    {% if student and student.batch=="JEE" %}selected{% endif %}>
+        JEE 2026 Service
+    </option>
+
+    <option value="NEET"
+    {% if student and student.batch=="NEET" %}selected{% endif %}>
+        NEET 2026 Service
+    </option>
+
+    <option value="MHTCET"
+    {% if student and student.batch=="MHTCET" %}selected{% endif %}>
+        MHTCET 2026 Service
+    </option>
 </select>
         </div>
         <div class="mb-3">
             <label>Subjects *</label>
-            <input type="text" name="subjects" class="form-control" required>
+            <input type="text" name="subjects" class="form-control" value="{{ student.subjects if student else '' }}" required>
         </div>
         <div class="mb-3">
             <label>Total Fee</label>
-            <input type="number" name="total_fee" id="total_fee" class="form-control" value="0" readonly>
+            <input type="number" name="total_fee" id="total_fee" class="form-control" value="{{ student.total_fee if student else '' }}" readonly>
         </div>
         <div class="mb-3">
             <label>Paid Fee</label>
-            <input type="number" name="paid_fee" class="form-control" value="0">
+            <input type="number" name="paid_fee" class="form-control" value="{{ student.paid_fee if student else '0' }}" >
         </div>
         <button type="submit" class="btn btn-dark">Submit Admission</button>
     </form>

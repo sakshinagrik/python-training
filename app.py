@@ -45,7 +45,31 @@ def home():
 @app.route('/about')
 def about():
     return render_template('About.html')
+@app.route('/ai')
+def ai_assistant():
+    return render_template("ai_assistant.html")
 
+@app.route("/career_guide")
+def career_guide():
+    return "<h2>Career Guide AI Page</h2>"
+
+
+@app.route("/doubt_solver")
+def doubt_solver():
+    return "<h2>AI Doubt Solver Page</h2>"
+
+
+@app.route("/quiz_generator")
+def quiz_generator():
+    return "<h2>Daily Quiz Generator Page</h2>"
+
+
+@app.route("/motivation")
+def motivation():
+    return "<h2>Motivation Corner Page</h2>"
+@app.route('/coaching_quiz')
+def coaching_quiz():
+    return render_template("coaching_quiz.html")
 @app.route('/students')
 def students():
     return render_template('Student.html', stud=stud)
@@ -125,9 +149,23 @@ def admission():
         return redirect(url_for('student_list'))
 
     return render_template("Admission.html")
-@app.route('/edit/<int:id>')
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_student(id):
     student = Student.query.get_or_404(id)
+
+    if request.method == 'POST':
+        student.name = request.form['name']
+        student.phone = request.form['phone']
+        student.email = request.form['email']
+        student.batch = request.form['batch']
+        student.subjects = request.form['subjects']
+        student.total_fee = int(request.form['total_fee'] or 0)
+        student.paid_fee = int(request.form['paid_fee'] or 0)
+
+        db.session.commit()
+
+        return redirect(url_for('student_list'))
+
     return render_template("Admission.html", student=student)
 @app.route('/delete/<int:id>')
 def delete_student(id):

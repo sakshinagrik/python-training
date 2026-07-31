@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+AI Assistant
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-5">
+        🤖 AI Student Assistant
+    </h1>
+
+    <div class="row justify-content-center">
+
+        <!-- Card 1 -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <h3>🎓 Career Guidance</h3>
+                <p>Get AI career suggestions.</p>
+
+                <a href="{{ url_for('career_guide') }}" class="btn btn-primary">
+                    Ask AI
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <h3>❓ Doubt Solver</h3>
+                <p>Ask anything about our coaching class.</p>
+             <a href="{{ url_for('doubt_solver') }}" class="btn btn-primary"> Ask AI</a>
+               
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+                <div class="col-md-5 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <h3>📝AI Coaching Quiz</h3>
+                <p>Test your knowledge about Apex Academy</p>
+
+                 <a href="{{ url_for('coaching_quiz') }}" class="btn btn-warning">Ask AI</a>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <h3>💡 Motivation Corner</h3>
+                <p>Daily motivational quotes.</p>
+
+               <a href="{{ url_for('motivation') }}" class="btn btn-danger">Ask AI</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
