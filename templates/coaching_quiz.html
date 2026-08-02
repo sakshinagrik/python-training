@@ -52,7 +52,7 @@
                     </select>
 
                     <div class="text-center">
-
+                      
                         <button
                             class="btn btn-primary btn-lg"
                             id="generateQuiz">
@@ -60,7 +60,7 @@
                             🤖 Generate AI Quiz
 
                         </button>
-
+                       
                     </div>
 
                 </div>
@@ -314,6 +314,10 @@ answer:"Final Marks"
 ]
 
 };
+
+
+let currentQuiz = [];
+
 document.getElementById("generateQuiz").addEventListener("click", function () {
 
     let exam = document.getElementById("exam").value;
@@ -324,6 +328,7 @@ document.getElementById("generateQuiz").addEventListener("click", function () {
     }
 
     let quiz = quizzes[exam];
+    currentQuiz = quiz;
 
     let html = "";
 
@@ -385,16 +390,98 @@ document.getElementById("generateQuiz").addEventListener("click", function () {
 
 function checkQuiz(){
 
-    document.getElementById("result").innerHTML=`
-    <div class="alert alert-success">
+    let score = 0;
+    let resultText = "";
 
-    <h3>🎉 Quiz Submitted Successfully</h3>
+    currentQuiz.forEach(function(q,index){
 
-    <h4>🤖 AI Feedback</h4>
+        let selected = document.querySelector('input[name="q'+index+'"]:checked');
 
-    <p>Excellent! Keep Practicing Daily.</p>
+        if(selected){
 
-    </div>
+            if(selected.value == q.answer){
+
+                score++;
+
+                resultText += `
+                <div class="alert alert-success mt-2">
+                    ✅ <b>Question ${index+1}</b> : Correct
+                </div>
+                `;
+
+            }
+            else{
+
+                resultText += `
+                <div class="alert alert-danger mt-2">
+                    ❌ <b>Question ${index+1}</b> : Wrong <br>
+                    ✔️ Correct Answer : <b>${q.answer}</b>
+                </div>
+                `;
+
+            }
+
+        }
+        else{
+
+            resultText += `
+            <div class="alert alert-warning mt-2">
+                ⚠️ <b>Question ${index+1}</b> : Not Attempted <br>
+                ✔️ Correct Answer : <b>${q.answer}</b>
+            </div>
+            `;
+
+        }
+
+    });
+
+    let feedback = "";
+
+    if(score == currentQuiz.length){
+
+        feedback = "🌟 Excellent! Perfect Score.";
+
+    }
+    else if(score >= 3){
+
+        feedback = "👍 Good Job! Keep Practicing.";
+
+    }
+    else{
+
+        feedback = "📚 Need More Practice. Revise and Try Again.";
+
+    }
+
+    document.getElementById("result").innerHTML = `
+    document.getElementById("result").scrollIntoView({
+    behavior: "smooth"});
+        <div class="card shadow mt-4">
+
+            <div class="card-body">
+
+                <h3 class="text-success">
+                    🎉 Quiz Submitted Successfully
+                </h3>
+
+                <h4 class="text-primary">
+                    Score : ${score} / ${currentQuiz.length}
+                </h4>
+
+                <hr>
+
+                ${resultText}
+
+                <hr>
+
+                <h5>🤖 AI Feedback</h5>
+
+                <p>${feedback}</p>
+
+            </div>
+
+        </div>
+
     `;
 
 }
