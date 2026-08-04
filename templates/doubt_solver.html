@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-3">
+        🤖 AI Coaching Assistant
+    </h2>
+
+    <p class="text-center text-muted">
+        Ask Anything About Our Coaching Class
+    </p>
+
+    <div class="card shadow p-4">
+
+        <label class="form-label">
+            Enter Your Question
+        </label>
+
+        <input
+        type="text"
+        id="question"
+        class="form-control"
+        placeholder="Example : What are your fees?">
+
+        <div class="text-center mt-4">
+
+            <button
+            class="btn btn-primary btn-lg"
+            onclick="solveDoubt()">
+
+                🤖 Ask AI
+
+            </button>
+          <div class="text-center mt-4 mb-4">
+
+    <button class="btn btn-outline-dark px-4"
+            onclick="history.back()">
+
+        ⬅️ Back to AI Assistant
+
+    </button>
+
+</div>
+</div>
+
+    </div>
+    
+        </div>
+
+        <hr>
+
+        <div id="answer"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+function solveDoubt(){
+
+    let question = document.getElementById("question").value.toLowerCase();
+
+    let answer="";
+
+    if(question.includes("fees")){
+
+        answer="💰 Our coaching provides affordable fee structure. Please contact the office for latest fees.";
+
+    }
+
+    else if(question.includes("notes")){
+
+        answer="📚 We provide Printed Notes, PDF Notes and Daily Practice Sheets.";
+
+    }
+
+    else if(question.includes("timing")){
+
+        answer="🕒 Morning and Evening batches are available.";
+
+    }
+
+    else if(question.includes("admission")){
+
+        answer="📝 Admission is open. Please fill the Admission Form or visit our coaching.";
+
+    }
+
+    else if(question.includes("demo")){
+
+        answer="🎓 Yes, we provide a Free Demo Lecture.";
+
+    }
+
+    else if(question.includes("scholarship")){
+
+        answer="🏆 Scholarship is available for deserving students.";
+
+    }
+
+    else if(question.includes("faculty")){
+
+        answer="👨‍🏫 Experienced Faculty with Personal Guidance.";
+
+    }
+
+    else if(question.includes("jee")){
+
+        answer="📘 JEE Batch includes Notes, Mock Tests and Daily Practice.";
+
+    }
+
+    else if(question.includes("neet")){
+
+        answer="🩺 NEET Batch includes Biology, Physics and Chemistry.";
+
+    }
+
+    else if(question.includes("mht")){
+
+        answer="📗 MHT-CET batches are available for Engineering & Pharmacy.";
+
+    }
+
+    else if(question.includes("hsc")){
+
+        answer="📖 HSC batches are available with complete syllabus coverage.";
+
+    }
+
+    else if(question.includes("mock")){
+
+        answer="📝 Weekly Mock Tests are conducted.";
+
+    }
+
+    else if(question.includes("location")){
+
+        answer="📍 Please contact our coaching office for location.";
+
+    }
+
+    else{
+
+        answer="❓ Sorry! I don't have an answer for this question. Please contact our coaching office.";
+
+    }
+
+    document.getElementById("answer").innerHTML=`
+
+    <div class="alert alert-info mt-4">
+
+        <h4>🤖 AI Answer</h4>
+
+        <p>${answer}</p>
+
+    </div>
+
+    `;
+
+    document.getElementById("question").value="";
+
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+
+document.getElementById("question").addEventListener("keypress",function(event){
+
+    if(event.key==="Enter"){
+
+        event.preventDefault();
+
+        solveDoubt();
+
+    }
+
+});
+
+});
+
+</script>
+
+{% endblock %}

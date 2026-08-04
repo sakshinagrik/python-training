@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        🤖 AI Study Plan Generator
+    </h2>
+
+    <div class="card shadow p-4">
+
+       <form id="studyForm">
+
+    <div class="mb-3">
+        <label class="form-label">👤 Student Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Enter Your Name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">🎯 Target Exam</label>
+
+        <select id="exam" class="form-select">
+
+            <option value="">Select Exam</option>
+
+            <option>JEE</option>
+            <option>NEET</option>
+            <option>MHT-CET</option>
+            <option>HSC</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">❤️ Favourite Subject</label>
+
+        <select id="favorite" class="form-select">
+
+            <option value="">Select Subject</option>
+
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Mathematics</option>
+            <option>Biology</option>
+            <option>Computer Science</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">😟 Weak Subject</label>
+
+        <select id="weak" class="form-select">
+
+            <option value="">Select Subject</option>
+
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Mathematics</option>
+            <option>Biology</option>
+            <option>Computer Science</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">⏰ Daily Study Hours</label>
+
+        <select id="hours" class="form-select">
+
+            <option>2 Hours</option>
+            <option>4 Hours</option>
+            <option>6 Hours</option>
+            <option>8 Hours</option>
+
+        </select>
+    </div>
+
+    <div class="text-center">
+
+        <button type="button"
+        class="btn btn-success btn-lg"
+        onclick="generatePlan()">
+
+            🤖 Generate AI Study Plan
+
+        </button>
+        <div class="text-center mt-3">
+
+    <a href="{{ url_for('ai_assistant') }}" class="btn btn-secondary">
+        ⬅️ Back to AI Assistant
+    </a>
+
+</div>
+    </div>
+
+</form>
+
+<hr>
+
+<div id="result"></div>
+
+    </div>
+
+</div>
+<script>
+
+function generatePlan(){
+
+    let name = document.getElementById("name").value;
+    let exam = document.getElementById("exam").value;
+    let favorite = document.getElementById("favorite").value;
+    let weak = document.getElementById("weak").value;
+    let hours = document.getElementById("hours").value;
+
+    if(name=="" || exam=="" || favorite=="" || weak==""){
+
+        alert("Please fill all details.");
+        return;
+
+    }
+
+    let plan = "";
+
+    if(exam=="JEE"){
+
+        plan = `
+        <h3>🤖 AI Study Plan Report</h3>
+
+        <h4>Welcome ${name}</h4>
+
+        <p><b>Target Exam :</b> JEE</p>
+
+        <p><b>Favourite Subject :</b> ${favorite}</p>
+
+        <p><b>Weak Subject :</b> ${weak}</p>
+
+        <p><b>Daily Study Time :</b> ${hours}</p>
+
+        <hr>
+
+        <h4>📅 Daily Routine</h4>
+
+        <ul>
+            <li>Morning Revision - 1 Hour</li>
+            <li>${favorite} Practice - 2 Hours</li>
+            <li>${weak} Extra Practice - 2 Hours</li>
+            <li>Previous Year Questions - 1 Hour</li>
+            <li>Mock Test Every Sunday</li>
+        </ul>
+
+        <h4>🤖 AI Suggestion</h4>
+
+        <p>
+        Since your favourite subject is <b>${favorite}</b>,
+        continue improving it.
+
+        Spend extra time on <b>${weak}</b> because it is your weak subject.
+
+        Daily revision and weekly mock tests will improve your JEE score.
+        </p>
+
+        `;
+    }
+
+    
+    if(exam=="NEET"){
+
+    plan = `
+    <h3>🤖 AI Personalized Study Plan</h3>
+
+    <h4>Welcome ${name}</h4>
+
+    <p><b>Target Exam :</b> NEET</p>
+
+    <p><b>Favourite Subject :</b> ${favorite}</p>
+
+    <p><b>Weak Subject :</b> ${weak}</p>
+
+    <p><b>Daily Study Time :</b> ${hours}</p>
+
+    <hr>
+
+    <h4>📅 Daily Study Routine</h4>
+
+    <ul>
+        <li>🧬 Biology Revision - 2 Hours</li>
+        <li>⚛️ Physics Numericals - 2 Hours</li>
+        <li>🧪 Chemistry MCQs - 1 Hour</li>
+        <li>📖 NCERT Revision - 30 Minutes</li>
+        <li>📝 Previous Year Questions - 30 Minutes</li>
+    </ul>
+
+    <hr>
+
+    <h4>🎯 Weekly Target</h4>
+
+    <ul>
+        <li>✔️ Biology MCQs : 500</li>
+        <li>✔️ Physics MCQs : 250</li>
+        <li>✔️ Chemistry MCQs : 300</li>
+        <li>✔️ 2 Full Mock Tests</li>
+    </ul>
+
+    <hr>
+
+    <h4>🤖 AI Suggestions</h4>
+
+    <p>
+    Since your favourite subject is <b>${favorite}</b>,
+    maintain it by daily revision.
+
+    Spend extra time on <b>${weak}</b> because it is your weak subject.
+
+    Practice NCERT daily.
+
+    Analyse every Mock Test carefully.
+
+    Never skip revision.
+    </p>
+
+    <hr>
+
+    <h4>🌟 AI Motivation</h4>
+
+    <p>
+    Every doctor was once a student.
+
+    Stay consistent.
+
+    Daily practice is the key to success in NEET.
+
+    Believe in yourself.
+    </p>
+
+    `;
+  }
+  if(exam=="MHT-CET"){
+     
+    plan = `
+    <h3>🤖 AI Personalized Study Plan</h3>
+
+    <h4>Welcome ${name}</h4>
+
+    <p><b>Target Exam :</b> MHT-CET</p>
+
+    <p><b>Favourite Subject :</b> ${favorite}</p>
+
+    <p><b>Weak Subject :</b> ${weak}</p>
+
+    <p><b>Daily Study Time :</b> ${hours}</p>
+
+    <hr>
+
+    <h4>📅 Daily Study Routine</h4>
+
+    <ul>
+        <li>📘 Physics - 1.5 Hours</li>
+        <li>📗 Chemistry - 1.5 Hours</li>
+        <li>📙 Mathematics / Biology - 2 Hours</li>
+        <li>📝 Solve 50 MCQs Daily</li>
+        <li>📖 Previous Year Papers - 30 Minutes</li>
+    </ul>
+
+    <hr>
+
+    <h4>🎯 Weekly Target</h4>
+
+    <ul>
+        <li>✔️ 350 MCQs</li>
+        <li>✔️ 2 Mock Tests</li>
+        <li>✔️ Weekly Revision</li>
+    </ul>
+
+    <hr>
+
+    <h4>🤖 AI Suggestions</h4>
+
+    <p>
+    Your strongest subject is <b>${favorite}</b>. Keep improving it.
+
+    Spend extra time on <b>${weak}</b>.
+
+    Practice speed and accuracy every day.
+
+    Analyse your mistakes after every Mock Test.
+    </p>
+
+    <hr>
+
+    <h4>🌟 AI Motivation</h4>
+
+    <p>
+    Success in MHT-CET comes from consistent practice.
+
+    Believe in yourself and never skip revision.
+
+    Every small effort counts.
+    </p>
+
+    `;
+  }
+  if(exam=="HSC"){
+
+    plan = `
+    <h3>🤖 AI Personalized Study Plan</h3>
+
+    <h4>Welcome ${name}</h4>
+
+    <p><b>Target Exam :</b> HSC Board</p>
+
+    <p><b>Favourite Subject :</b> ${favorite}</p>
+
+    <p><b>Weak Subject :</b> ${weak}</p>
+
+    <p><b>Daily Study Time :</b> ${hours}</p>
+
+    <hr>
+
+    <h4>📅 Daily Study Routine</h4>
+
+    <ul>
+        <li>📖 Read Textbook - 2 Hours</li>
+        <li>📝 Writing Practice - 1 Hour</li>
+        <li>📚 Revision - 1 Hour</li>
+        <li>📄 Previous Year Papers - 1 Hour</li>
+        <li>📋 Self Test - 30 Minutes</li>
+    </ul>
+
+    <hr>
+
+    <h4>🎯 Weekly Target</h4>
+
+    <ul>
+        <li>✔️ Complete 2 Chapters</li>
+        <li>✔️ Solve 2 Previous Year Papers</li>
+        <li>✔️ Revise Weak Subject Daily</li>
+        <li>✔️ One Full Mock Test</li>
+    </ul>
+
+    <hr>
+
+    <h4>🤖 AI Suggestions</h4>
+
+    <p>
+
+    Since your favourite subject is <b>${favorite}</b>,
+    continue practicing it daily.
+
+    Give extra attention to <b>${weak}</b>.
+
+    Make short notes.
+
+    Revise every Sunday.
+
+    Practice writing answers with proper presentation.
+
+    </p>
+
+    <hr>
+
+    <h4>🌟 AI Motivation</h4>
+
+    <p>
+
+    Success in HSC comes from consistency,
+    revision and writing practice.
+
+    Believe in yourself.
+
+    Every day of study brings you one step closer to success.
+
+    </p>
+
+    `;
+ }
+ document.getElementById("result").innerHTML = plan;
+ document.getElementById("result").scrollIntoView({
+    behavior: "smooth"
+});
+}
+
+</script>
+{% endblock %}

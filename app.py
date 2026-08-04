@@ -48,28 +48,25 @@ def about():
 @app.route('/ai')
 def ai_assistant():
     return render_template("ai_assistant.html")
-
 @app.route("/career_guide")
 def career_guide():
     return "<h2>Career Guide AI Page</h2>"
-
-
 @app.route("/doubt_solver")
 def doubt_solver():
-    return "<h2>AI Doubt Solver Page</h2>"
-
-
+    return render_template("doubt_solver.html")
 @app.route("/quiz_generator")
 def quiz_generator():
     return "<h2>Daily Quiz Generator Page</h2>"
-
-
 @app.route("/motivation")
 def motivation():
     return "<h2>Motivation Corner Page</h2>"
 @app.route('/coaching_quiz')
 def coaching_quiz():
     return render_template("coaching_quiz.html")
+@app.route("/study_plan")
+def study_plan():
+    return render_template("study_plan.html")
+
 @app.route('/students')
 def students():
     return render_template('Student.html', stud=stud)
