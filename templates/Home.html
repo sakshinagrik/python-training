@@ -1,6 +1,77 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .feature-card{
+
+    position:relative;
+    border-radius:20px;
+    background:white;
+    overflow:hidden;
+    z-index:1;
+}
+
+
+.feature-card::before{
+
+    content:"";
+    position:absolute;
+
+    top:-2px;
+    left:-2px;
+
+    width:calc(100% + 4px);
+    height:calc(100% + 4px);
+
+    background:linear-gradient(
+        45deg,
+        #00c6ff,
+        #0072ff,
+        #00ffcc,
+        #ff00cc,
+        #00c6ff
+    );
+
+    background-size:300% 300%;
+
+    animation:borderMove 5s linear infinite;
+
+    border-radius:22px;
+
+    z-index:-1;
+}
+
+
+@keyframes borderMove{
+
+0%{
+    background-position:0% 50%;
+}
+
+50%{
+    background-position:100% 50%;
+}
+
+100%{
+    background-position:0% 50%;
+}
+
+}
+
+
+/* Hover Effect */
+
+.feature-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 0 25px rgba(0,180,255,.6);
+
+    transition:.4s;
+
+}
+</style>
 
 <div class="container py-5">
 

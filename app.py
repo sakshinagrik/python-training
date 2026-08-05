@@ -54,12 +54,13 @@ def career_guide():
 @app.route("/doubt_solver")
 def doubt_solver():
     return render_template("doubt_solver.html")
+@app.route("/motivation_corner")
+def motivation_corner():
+    return render_template("motivation_corner.html")
 @app.route("/quiz_generator")
 def quiz_generator():
     return "<h2>Daily Quiz Generator Page</h2>"
-@app.route("/motivation")
-def motivation():
-    return "<h2>Motivation Corner Page</h2>"
+
 @app.route('/coaching_quiz')
 def coaching_quiz():
     return render_template("coaching_quiz.html")
