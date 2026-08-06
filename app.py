@@ -67,7 +67,9 @@ def coaching_quiz():
 @app.route("/study_plan")
 def study_plan():
     return render_template("study_plan.html")
-
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
 @app.route('/students')
 def students():
     return render_template('Student.html', stud=stud)

@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<style>
+
+.dashboard-card{
+
+background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+
+color:white;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.25);
+
+box-shadow:0 8px 25px rgba(0,140,255,.35);
+
+transition:.4s;
+
+min-height:190px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.dashboard-card:hover{
+
+transform:translateY(-10px) scale(1.03);
+
+box-shadow:0 0 35px rgba(0,183,255,.7);
+
+}
+
+.dashboard-card h1{
+
+font-size:50px;
+
+margin-bottom:12px;
+
+}
+
+.dashboard-card h2{
+
+font-size:38px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+</style>
+
+<div class="container py-5">
+
+<h1 class="text-center fw-bold text-white mb-5">
+
+📊 Apex Academy Dashboard
+
+</h1>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="card dashboard-card text-center p-4">
+
+<div>
+
+<h1>👨‍🎓</h1>
+
+<h4>Total Students</h4>
+
+<h2>0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card dashboard-card text-center p-4">
+
+<div>
+
+<h1>🏆</h1>
+
+<h4>Topper Students</h4>
+
+<h2>0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card dashboard-card text-center p-4">
+
+<div>
+
+<h1>💰</h1>
+
+<h4>Pending Fees</h4>
+
+<h2>₹0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card dashboard-card text-center p-4">
+
+<div>
+
+<h1>✅</h1>
+
+<h4>Paid Students</h4>
+
+<h2>0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card dashboard-card text-center p-4">
+
+<div>
+
+<h1>❌</h1>
+
+<h4>Pending Students</h4>
+
+<h2>0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card dashboard-card text-center p-4">
+
+<div>
+
+<h1>📝</h1>
+
+<h4>New Admissions</h4>
+
+<h2>0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="card shadow-lg mt-5 p-4"
+style="
+background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+color:white;
+border-radius:20px;
+">
+
+    <h3 class="mb-3">💰 Fee Collection Progress</h3>
+
+    <div class="progress" style="height:30px;border-radius:20px;">
+
+        <div class="progress-bar bg-success"
+             style="width:75%;font-weight:bold;">
+            75%
+        </div>
+
+    </div>
+
+    <p class="mt-3 mb-0">
+        ₹3,75,000 Collected out of ₹5,00,000
+    </p>
+
+</div>
+
+
+<!-- Recent Admissions -->
+
+<div class="card shadow-lg mt-5 p-4"
+style="
+background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+color:white;
+border-radius:20px;
+">
+
+    <h3 class="mb-4">📝 Recent Admissions</h3>
+
+    <table class="table table-bordered table-striped table-light">
+
+        <thead>
+
+        <tr>
+
+            <th>Name</th>
+
+            <th>Batch</th>
+
+            <th>Date</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+            <td>Rahul Patil</td>
+
+            <td>JEE</td>
+
+            <td>05/08/2026</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Sneha Kale</td>
+
+            <td>NEET</td>
+
+            <td>04/08/2026</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Amit Sharma</td>
+
+            <td>MHT-CET</td>
+
+            <td>03/08/2026</td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<!-- Quick Actions -->
+
+<div class="row mt-5 g-4">
+
+    <div class="col-md-4">
+
+        <a href="{{ url_for('admission') }}"
+           class="btn btn-primary w-100 p-3">
+            ➕ New Admission
+        </a>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <a href="{{ url_for('student_list') }}"
+           class="btn btn-success w-100 p-3">
+            👨‍🎓 Student List
+        </a>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <a href="{{ url_for('home') }}"
+           class="btn btn-warning w-100 p-3">
+            🏠 Home
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

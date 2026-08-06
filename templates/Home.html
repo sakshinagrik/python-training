@@ -1,115 +1,87 @@
 {% extends "base.html" %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
-<style>
-    .feature-card{
-
-    position:relative;
-    border-radius:20px;
-    background:white;
-    overflow:hidden;
-    z-index:1;
-}
-
-
-.feature-card::before{
-
-    content:"";
-    position:absolute;
-
-    top:-2px;
-    left:-2px;
-
-    width:calc(100% + 4px);
-    height:calc(100% + 4px);
-
-    background:linear-gradient(
-        45deg,
-        #00c6ff,
-        #0072ff,
-        #00ffcc,
-        #ff00cc,
-        #00c6ff
-    );
-
-    background-size:300% 300%;
-
-    animation:borderMove 5s linear infinite;
-
-    border-radius:22px;
-
-    z-index:-1;
-}
-
-
-@keyframes borderMove{
-
-0%{
-    background-position:0% 50%;
-}
-
-50%{
-    background-position:100% 50%;
-}
-
-100%{
-    background-position:0% 50%;
-}
-
-}
-
-
-/* Hover Effect */
-
-.feature-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-    0 0 25px rgba(0,180,255,.6);
-
-    transition:.4s;
-
-}
-</style>
 
 <div class="container py-5">
 
     <div class="row g-4">
 
         <!-- Left Side -->
+
         <div class="col-12 col-lg-3">
 
-            <div class="card shadow text-center p-4 mb-4" style="background:#acdbe7;">
-                <h4>📚 Expert Teachers</h4>
-                <p class="mb-0">Experienced Faculty</p>
+            <div class="card shadow text-center p-5 mb-4"
+            style="
+            background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+            color:white;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,.3);
+            box-shadow:0 8px 25px rgba(0,140,255,.3);
+            min-height:190px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            ">
+
+                <div>
+                    <h3>📚 Expert Teachers</h3>
+                    <p class="mb-0">Experienced Faculty</p>
+                </div>
+
             </div>
 
-            <div class="card shadow text-center p-4" style="background:#acdbe7;">
-                <h4>🏆 Best Results</h4>
-                <p class="mb-0">Top Student Performance</p>
+            <div class="card shadow text-center p-5"
+            style="
+            background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+            color:white;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,.3);
+            box-shadow:0 8px 25px rgba(0,140,255,.3);
+            min-height:190px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            ">
+
+                <div>
+                    <h3>🏆 Best Results</h3>
+                    <p class="mb-0">Top Student Performance</p>
+                </div>
+
             </div>
 
         </div>
 
         <!-- Center -->
+
         <div class="col-12 col-lg-6">
 
-            <div class="card shadow-lg border-0 text-center h-100" style="background:#91d4e4;border-radius:20px;">
+            <div class="card shadow-lg border-0 text-center h-100"
+            style="
+            background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+            color:white;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,.3);
+            box-shadow:0 8px 25px rgba(0,140,255,.3);
+            min-height:460px;
+            ">
 
-                <div class="card-body d-flex flex-column justify-content-center">
+                <div class="card-body d-flex flex-column justify-content-center p-5">
 
-                    <h1 class="fw-bold mb-3">
+                    <h1 class="fw-bold display-5 mb-4">
                         🎓 Welcome to our Apex Academy 📚
                     </h1>
 
-                    <p class="fs-5 text-dark">
-                        Your success is our mission. Let's learn together!
+                    <p class="fs-4">
+                        Your Success is Our Mission.
+                        Learn Today • Lead Tomorrow 🚀
                     </p>
 
                     <a href="{{ url_for('about') }}"
-                       class="btn btn-primary btn-lg mt-3">
-                        About coacing class
+                       class="btn btn-light btn-lg mt-4">
+                        About Coaching Class
                     </a>
 
                 </div>
@@ -117,18 +89,46 @@
             </div>
 
         </div>
+                <div class="col-12 col-lg-3">
 
-        <!-- Right Side -->
-        <div class="col-12 col-lg-3">
+            <div class="card shadow text-center p-5 mb-4"
+            style="
+            background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+            color:white;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,.3);
+            box-shadow:0 8px 25px rgba(0,140,255,.3);
+            min-height:190px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            ">
 
-            <div class="card shadow text-center p-4 mb-4" style="background:#acdbe7;">
-                <h4>📝 Daily Tests</h4>
-                <p class="mb-0">Regular Practice</p>
+                <div>
+                    <h3>📝 Daily Tests</h3>
+                    <p class="mb-0">Regular Practice</p>
+                </div>
+
             </div>
 
-            <div class="card shadow text-center p-4" style="background:#acdbe7;">
-                <h4>👨‍🏫 Personal Guidance</h4>
-                <p class="mb-0">Individual Attention</p>
+            <div class="card shadow text-center p-5"
+            style="
+            background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+            color:white;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,.3);
+            box-shadow:0 8px 25px rgba(0,140,255,.3);
+            min-height:190px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            ">
+
+                <div>
+                    <h3>👨‍🏫 Personal Guidance</h3>
+                    <p class="mb-0">Individual Attention</p>
+                </div>
+
             </div>
 
         </div>
@@ -137,4 +137,75 @@
 
 </div>
 
-{% endblock %}ss
+<!-- Statistics -->
+
+<div class="container mt-5">
+
+    <h2 class="text-center fw-bold text-white mb-4">
+        📊 Our Achievements
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card text-center p-4 shadow-lg"
+            style="background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);color:white;border-radius:20px;">
+                <h1>500+</h1>
+                <h5>Students</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center p-4 shadow-lg"
+            style="background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);color:white;border-radius:20px;">
+                <h1>98%</h1>
+                <h5>Results</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center p-4 shadow-lg"
+            style="background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);color:white;border-radius:20px;">
+                <h1>15+</h1>
+                <h5>Expert Teachers</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center p-4 shadow-lg"
+            style="background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);color:white;border-radius:20px;">
+                <h1>10+</h1>
+                <h5>Courses</h5>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<footer class="mt-5 py-4 text-center"
+style="
+background:linear-gradient(135deg,#093787,#4facfe,#2f62ba);
+color:white;
+border-radius:20px 20px 0 0;
+box-shadow:0 -5px 20px rgba(0,140,255,.3);
+">
+
+    <h4 class="fw-bold mb-2">
+        🎓 Apex Academy
+    </h4>
+
+    <p class="mb-2">
+        Learn Today • Lead Tomorrow 🚀
+    </p>
+
+    <p class="mb-1">
+        📍 Excellence in JEE • NEET • MHT-CET Coaching
+    </p>
+
+    <small>
+        © 2026 Apex Academy | Developed by <b>Sakshi Nagrik</b> 💙
+    </small>
+
+</footer>
+
+{% endblock %}
