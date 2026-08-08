@@ -24,7 +24,6 @@ class Student(db.Model):
     email = db.Column(db.String(100))
     photo = db.Column(db.String(100))
     batch = db.Column(db.String(50), nullable=False)
-    subjects = db.Column(db.String(200), nullable=False)
     total_fee = db.Column(db.Integer, default=0)
     paid_fee = db.Column(db.Integer, default=0)
     admission_date = db.Column(db.DateTime, default=datetime.utcnow)
@@ -69,26 +68,91 @@ def study_plan():
     return render_template("study_plan.html")
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+
+    students = Student.query.all()
+
+    total_students = len(students)
+
+    paid_students = 0
+    pending_students = 0
+    pending_fees = 0
+
+    total_fee = 0
+    paid_fee = 0
+
+    for student in students:
+
+        student_total_fee = student.total_fee or 0
+        student_paid_fee = student.paid_fee or 0
+
+        total_fee += student_total_fee
+        paid_fee += student_paid_fee
+
+        if student.pending_fee <= 0:
+            paid_students += 1
+        else:
+            pending_students += 1
+            pending_fees += student.pending_fee
+
+    if total_fee > 0:
+        fee_progress = round((paid_fee / total_fee) * 100)
+    else:
+        fee_progress = 0
+
+    recent_admissions = Student.query.order_by(
+        Student.admission_date.desc()
+    ).limit(3).all()
+
+    new_admissions = total_students
+
+    return render_template(
+        "dashboard.html",
+        total_students=total_students,
+        paid_students=paid_students,
+        pending_students=pending_students,
+        pending_fees=pending_fees,
+        fee_progress=fee_progress,
+        new_admissions=new_admissions,
+        recent_admissions=recent_admissions,
+        paid_fee=paid_fee,
+        total_fee=total_fee
+    )
 @app.route('/students')
 def students():
     return render_template('Student.html', stud=stud)
 # Navin Route - Admission Form
 @app.route('/student_list')
 def student_list():
+
     print(session)
+
     if "user" not in session:
-       flash("Please Login First", "warning")
-       return redirect(url_for('login'))
-    search = request.args.get("search")
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    search = request.args.get("search", "")
+    page = request.args.get("page", 1, type=int)
 
     if search:
-       students = Student.query.filter(Student.name.contains(search) ).all()
+        students = Student.query.filter(
+            Student.name.contains(search)
+        ).paginate(
+            page=page,
+            per_page=5,
+            error_out=False
+        )
     else:
-       students = Student.query.all()
+        students = Student.query.paginate(
+            page=page,
+            per_page=5,
+            error_out=False
+        )
 
-    return render_template( "student_list.html",students=students,search=search)
-
+    return render_template(
+        "student_list.html",
+        students=students,
+        search=search
+    )
 @app.route('/search_students')
 def search_students():
 
@@ -120,32 +184,40 @@ def search_students():
 
     return jsonify(data)
 
+
 @app.route('/admission', methods=['GET', 'POST'])
 def admission():
-    
+
     print(dict(session))
+
     if "user" not in session:
         flash("Please Login First", "warning")
         return redirect(url_for('login'))
+
     if request.method == 'POST':
-        photo = request.files['photo']
 
-        filename = secure_filename(photo.filename)
+        # Photo is OPTIONAL
+        photo = request.files.get('photo')
 
-        photo.save(os.path.join("static/uploads", filename))
+        filename = ""
+
+        if photo and photo.filename:
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join("static/uploads", filename))
+
         new_student = Student(
-
             name=request.form['name'],
             phone=request.form['phone'],
             photo=filename,
             email=request.form['email'],
             batch=request.form['batch'],
-            subjects=request.form['subjects'],
             total_fee=int(request.form['total_fee'] or 0),
             paid_fee=int(request.form['paid_fee'] or 0)
         )
+
         db.session.add(new_student)
         db.session.commit()
+
         return redirect(url_for('student_list'))
 
     return render_template("Admission.html")
@@ -158,7 +230,6 @@ def edit_student(id):
         student.phone = request.form['phone']
         student.email = request.form['email']
         student.batch = request.form['batch']
-        student.subjects = request.form['subjects']
         student.total_fee = int(request.form['total_fee'] or 0)
         student.paid_fee = int(request.form['paid_fee'] or 0)
 
@@ -173,27 +244,53 @@ def delete_student(id):
     db.session.delete(student)
     db.session.commit()
     return redirect('/student_list')
+ADMIN_USERS = {
+    "admin1": "admin123",
+    "admin2": "admin456"
+}
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
     if request.method == 'POST':
+
         username = request.form['username']
         password = request.form['password']
 
-        flash("✅ Login Successful!", "success")
-        session['user']="test"
-        return redirect(url_for('home'))
+        # Admin Login
+        if username in ADMIN_USERS and ADMIN_USERS[username] == password:
+
+            session['user'] = username
+            session['role'] = 'admin'
+
+            flash("✅ Admin Login Successful!", "success")
+            return redirect(url_for('dashboard'))
+
+        # Normal User Login
+        else:
+
+            session['user'] = username
+            session['role'] = 'user'
+
+            flash("✅ Login Successful!", "success")
+            return redirect(url_for('home'))
 
     return render_template('login.html')
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
     if request.method == 'POST':
-        flash("✅ Registration Successful!", "success")
+
+        username = request.form['username']
+        password = request.form['password']
+
+        session['user'] = username
+        session['role'] = 'user'
+
+        flash("✅ Registration Successful! Please Login.", "success")
         return redirect(url_for('login'))
 
     return render_template('register.html')
+   
 @app.route('/logout')
 def logout():
     session.clear()
