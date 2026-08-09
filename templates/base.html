@@ -223,7 +223,7 @@ box-shadow:0 8px 25px rgba(0,140,255,.3);
                  <a href="{{ url_for('admission') }}" class="nav-item nav-link {% if request.endpoint == 'admission' %}active fw-bold{% endif %}">📝 New Admission</a>
                 
                     <a href="{{ url_for('student_list') }}" class="nav-item nav-link {% if request.endpoint == 'student_list' %}active fw-bold{% endif %}">🧑‍🎓&nbsp; Student List</a>
-                    <a href="{{ url_for('Dashboard') }}" class="nav-link">📊 Dashboard</a>
+                    <a href="{{ url_for('dashboard') }}" class="nav-link">📊 Dashboard</a>
                     
                     <div class="nav-item dropdown">
 
@@ -280,7 +280,7 @@ box-shadow:0 8px 25px rgba(0,140,255,.3);
             </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="{{ url_for('login') }}">🔐 Admin Login</a>
-               <a class="nav-link" href="{{ url_for('register') }}">👤User Register</a>
+               
                <li class="nav-item">
     <a class="nav-link" href="{{ url_for('logout') }}">
         <i class="fa-solid fa-right-from-bracket"></i> Logout

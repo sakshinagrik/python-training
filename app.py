@@ -247,34 +247,28 @@ def delete_student(id):
     db.session.commit()
     return redirect('/student_list')
 ADMIN_USERS = {
-    "sakshinagarik@gmail.com": "sakshi@4321",
-    "Anuradhakarhale@gmail.com": "anu@4321"
+    "sakshinagrik": "sakshi@4321",
+    "Anuradhakarhale": "anu@4321"
 }
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
     if request.method == 'POST':
 
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
 
-        # Admin Login
+        print("LOGIN:", repr(username), repr(password))
+
         if username in ADMIN_USERS and ADMIN_USERS[username] == password:
-
             session['user'] = username
             session['role'] = 'admin'
 
             flash("✅ Admin Login Successful!", "success")
             return redirect(url_for('dashboard'))
 
-        # Normal User Login
-        else:
-
-            session['user'] = username
-            session['role'] = 'user'
-
-            flash("✅ Login Successful!", "success")
-            return redirect(url_for('home'))
+        flash("❌ Invalid username or password!", "danger")
+        return redirect(url_for('login'))
 
     return render_template('login.html')
 @app.route('/register', methods=['GET', 'POST'])
