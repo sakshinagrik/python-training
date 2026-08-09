@@ -40,8 +40,6 @@ class Admin(db.Model):
 @app.route('/')
 def home():
     return redirect(url_for('register'))
-    
-
 @app.route('/about')
 def about():
     return render_template('About.html')
