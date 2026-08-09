@@ -36,6 +36,7 @@ pointer-events:none;
 
 z-index:0;
 
+
 background:
 
 
@@ -126,6 +127,10 @@ filter:blur(1px);
 animation:bubbleMove 8s ease-in-out infinite alternate;
 
 }
+body > *{
+    position:relative;
+    z-index:1;
+}
 
 
 @keyframes bubbleMove{
@@ -139,7 +144,38 @@ transform:translate(30px,-40px);
 }
 
 }
+body > *{
+    position: relative;
+    z-index: 1;
+}
+@media (max-width: 768px){
 
+    .navbar{
+        margin: 0 !important;
+        border-radius: 15px !important;
+        padding: 10px !important;
+    }
+
+    .navbar-brand{
+        font-size: 22px !important;
+    }
+
+    .navbar-collapse{
+        background: rgba(9,55,135,0.95);
+        border-radius: 15px;
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .navbar-nav .nav-link{
+        font-size: 16px;
+        padding: 10px 12px !important;
+    }
+
+    .navbar-toggler{
+        border: 1px solid rgba(255,255,255,.5);
+    }
+}
 </style>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,7 +185,7 @@ transform:translate(30px,-40px);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <title>{% block title %} Coaching Class Manger {% endblock %}</title>
     </head>
-    <body style="background-color:#589dac">
+    <body>
     
      <nav class="navbar navbar-expand-lg navbar-dark py-3"
      style="
