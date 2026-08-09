@@ -39,6 +39,7 @@ class Admin(db.Model):
 # Tujhe Junne Routes - Ashech Rahu De
 @app.route('/')
 def home():
+    return redirect(url_for('register'))
     return render_template('Home.html')
 
 @app.route('/about')
@@ -245,8 +246,8 @@ def delete_student(id):
     db.session.commit()
     return redirect('/student_list')
 ADMIN_USERS = {
-    "admin1": "admin123",
-    "admin2": "admin456"
+    "sakshinagarik@gmail.com": "sakshi@4321",
+    "Anuradhakarhale@gmail.com": "anu@4321"
 }
 @app.route('/login', methods=['GET', 'POST'])
 def login():
