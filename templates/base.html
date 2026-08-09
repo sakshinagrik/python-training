@@ -124,7 +124,7 @@ radial-gradient(circle at 5% 70%, rgba(255,255,255,.22) 0 11px, transparent 17px
 
 filter:blur(1px);
 
-animation:bubbleMove 8s ease-in-out infinite alternate;
+animation:bubbleMove 2s ease-in-out infinite alternate;
 
 }
 body > *{
@@ -147,6 +147,15 @@ transform:translate(30px,-40px);
 body > *{
     position: relative;
     z-index: 1;
+}
+.navbar{
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+.navbar .dropdown-menu{
+    position: absolute;
+    z-index: 2000 !important;
 }
 @media (max-width: 768px){
 
@@ -210,21 +219,59 @@ box-shadow:0 8px 25px rgba(0,140,255,.3);
 
                 <a href="{{ url_for('students') }}" class="nav-item nav-link {% if request.endpoint == 'students' %}active fw-bold{% endif %}">👥&nbsp; Topper Students</a>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('ai_assistant') }}"> 🤖 AI Assistant</a></li>
+
                  <a href="{{ url_for('admission') }}" class="nav-item nav-link {% if request.endpoint == 'admission' %}active fw-bold{% endif %}">📝 New Admission</a>
                 
                     <a href="{{ url_for('student_list') }}" class="nav-item nav-link {% if request.endpoint == 'student_list' %}active fw-bold{% endif %}">🧑‍🎓&nbsp; Student List</a>
                     <a href="{{ url_for('dashboard') }}" class="nav-link">📊 Dashboard</a>
-                    <a href="#" class=" nav-link dropdown-toggle" data-bs-toggle="dropdown" active>📞Contact us</a>
+                    
                     <div class="nav-item dropdown">
-                    <div class="dropdown-menu">
-                        <a href="#" class="drpdown-item">7620131764 </a><h6>Sakshi Nagrik</h6>
-                        <a href="#" class="drpdown-item">9881196148 </a><h6>Dipali Nagrik</h6>
-                        <a href="#" class="drpdown-item">7066201172 </a><h6>Vithhal Sawant</h6>
-                        <a href="#" class="drpdown-item">9657666104 </a><h6>Gajanan Sawant</h6>
-                        <a href="#" class="drpdown-item">9657237004 </a><h6>Dattaray Wankhede</h6>
-                        
-                    </div>
-                </div>
+
+    <a href="#" class="nav-link dropdown-toggle"
+       data-bs-toggle="dropdown">
+        📞 Contact us
+    </a>
+
+    <ul class="dropdown-menu">
+
+        <li>
+            <span class="dropdown-item-text">
+                <b>7620131764</b><br>
+                Sakshi Nagrik
+            </span>
+        </li>
+
+        <li>
+            <span class="dropdown-item-text">
+                <b>9881196148</b><br>
+                Dipali Nagrik
+            </span>
+        </li>
+
+        <li>
+            <span class="dropdown-item-text">
+                <b>7066201172</b><br>
+                Vithhal Sawant
+            </span>
+        </li>
+
+        <li>
+            <span class="dropdown-item-text">
+                <b>9657666104</b><br>
+                Gajanan Sawant
+            </span>
+        </li>
+
+        <li>
+            <span class="dropdown-item-text">
+                <b>9657237004</b><br>
+                Dattaray Wankhede
+            </span>
+        </li>
+
+    </ul>
+
+</div>
                 </div>
                 
 

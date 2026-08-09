@@ -39,7 +39,7 @@ class Admin(db.Model):
 # Tujhe Junne Routes - Ashech Rahu De
 @app.route('/')
 def home():
-    return redirect(url_for('register'))
+    return render_template("Home.html")
 @app.route('/about')
 def about():
     return render_template('About.html')
@@ -67,6 +67,9 @@ def study_plan():
     return render_template("study_plan.html")
 @app.route("/dashboard")
 def dashboard():
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
 
     students = Student.query.all()
 
