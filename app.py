@@ -413,9 +413,11 @@ def admission():
 
         if photo and photo.filename:
             filename = secure_filename(photo.filename)
-            photo.save(os.path.join("static/uploads", filename))
+           upload_folder = os.path.join(app.root_path, "static", "uploads")
+                os.makedirs(upload_folder, exist_ok=True)
 
-        new_student = Student(
+                photo.save(os.path.join(upload_folder, filename))
+                        new_student = Student(
             name=request.form['name'],
             phone=request.form['phone'],
             photo=filename,
