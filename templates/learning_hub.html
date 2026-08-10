@@ -1,0 +1,468 @@
+{% extends "base.html" %}
+
+{% block title %}Student Learning Hub{% endblock %}
+
+{% block content %}
+
+<style>
+    .learning-page {
+        padding: 30px 10px 50px;
+    }
+
+    /* Header */
+    .learning-header {
+        background: linear-gradient(135deg, #093787, #2388e0);
+        color: white;
+        border-radius: 22px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0, 100, 200, 0.25);
+    }
+
+    .learning-header h1 {
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+
+    .learning-header p {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.92;
+    }
+
+    /* Cards */
+    .learning-card {
+        display: block;
+        text-decoration: none;
+        color: #18233a;
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        min-height: 175px;
+        border: 1px solid #e9edf4;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .learning-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+        color: #18233a;
+    }
+
+    .learning-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    .learning-card h4 {
+        font-size: 19px;
+        font-weight: 800;
+        margin-bottom: 7px;
+    }
+
+    .learning-card p {
+        margin: 0;
+        color: #667085;
+        font-size: 14px;
+    }
+
+    /* Icon backgrounds */
+    .live {
+        background: #ffe3ec;
+    }
+
+    .video {
+        background: #dcecff;
+    }
+
+    .combo {
+        background: #eee4ff;
+    }
+
+    .demo {
+        background: #ddf6e6;
+    }
+
+    .notes {
+        background: #fff0cf;
+    }
+
+    .syllabus {
+        background: #d9f5f3;
+    }
+
+    .test {
+        background: #ffe3d6;
+    }
+
+    .performance {
+        background: #e1edff;
+    }
+
+    .progress {
+        background: #f9e0f0;
+    }
+
+    .schedule {
+        background: #e7e2ff;
+    }
+
+    .notification {
+        background: #dff6f4;
+    }
+
+    .profile {
+        background: #dcecff;
+    }
+
+    .achievement {
+        background: #ddf6e6;
+    }
+    .learning-card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+    }
+   .learning-card-link:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+    }
+
+    @media (max-width: 768px) {
+        .learning-header h1 {
+            font-size: 25px;
+        }
+    }
+</style>
+
+
+<div class="container learning-page">
+
+    <!-- HEADER -->
+
+    <div class="learning-header">
+
+        <h1>🎓 Student Learning Hub</h1>
+
+        <p>
+            Courses, lectures, notes, tests, performance and class schedule
+            — everything in one place.
+        </p>
+
+    </div>
+
+
+    <!-- FEATURE CARDS -->
+
+    <div class="row g-4">
+
+
+        <!-- LIVE COURSES -->
+
+      <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('live_courses') }}" class="learning-card-link">
+
+        <div class="learning-card">
+            🔴
+                    <h3>Live Courses</h3>
+                    <p>Join live online and offline classes</p>
+                </div>
+
+            </a>
+
+        </div>
+        <!-- VIDEO COURSES -->
+
+       <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('video_courses') }}" class="text-decoration-none">
+
+        <div class="learning-card">
+
+            🎥
+
+            <h3>Video Courses</h3>
+
+            <p>Watch recorded lectures and courses</p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        <!-- COMBO COURSES -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('combo_courses') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <h3>Combo Courses</h3>
+
+            <p>
+                Explore combined course packages
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+
+
+        <!-- DEMO COURSES -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('demo_courses') }}"
+       class="text-decoration-none">
+
+       
+        <div class="learning-card">
+
+            <div class="card-icon">
+                🎬
+            </div>
+
+            <h3>Demo Courses</h3>
+
+            <p>
+                Watch selected demo lectures
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+
+
+        <!-- CLASS NOTES -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('class_notes') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            📒
+
+            <h3>Class Notes</h3>
+
+            <p>
+                Access subject-wise class notes
+                and study material
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+
+        <!-- SYLLABUS -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('syllabus') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            📚
+
+            <h3>Syllabus</h3>
+
+            <p>
+                View exam-wise subjects and syllabus
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+
+
+        <!-- CLASS TESTS -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('class_tests') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                📝
+            </div>
+
+            <h3>
+                Class Tests
+            </h3>
+
+            <p>
+                View upcoming class test schedules
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+        <!-- PERFORMANCE -->
+           <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('performance') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                📊
+            </div>
+
+            <h3>
+                Performance
+            </h3>
+
+            <p>
+                Check your learning performance and achievements
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+
+        <!-- PROGRESS -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('progress') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                📈
+            </div>
+
+            <h3>
+                Progress
+            </h3>
+
+            <p>
+                Track your learning progress
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+
+
+        <!-- CLASS SCHEDULE -->
+
+       <div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('class_schedule') }}" class="learning-card">
+
+        <div class="learning-icon">
+            📅
+        </div>
+
+        <h4>Class Schedule</h4>
+
+        <p>
+            View your upcoming online and offline classes
+        </p>
+
+    </a>
+
+</div>
+        <!-- PROFILE -->
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+            <a href="#" class="learning-card">
+
+                <div class="learning-icon profile">
+                    👤
+                </div>
+
+                <h4>Profile</h4>
+
+                <p>
+                    View your student profile
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <!-- ACHIEVEMENTS -->
+
+    <!-- ACHIEVEMENTS -->
+
+<div class="col-12 col-sm-6 col-lg-3">
+
+    <a href="{{ url_for('achievements') }}"
+       class="text-decoration-none">
+
+        <div class="learning-card">
+
+            <div class="learning-icon">
+                🏆
+            </div>
+
+            <h3>
+                Achievements
+            </h3>
+
+            <p>
+                Explore our class achievements
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+    <div class="text-center mt-5 mb-4">
+
+    <a href="{{ url_for('dashboard') }}"
+       class="btn btn-outline-primary"
+       style="
+           border-radius: 12px;
+           padding: 11px 26px;
+           font-weight: 700;
+       ">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+{% endblock %}

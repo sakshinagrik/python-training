@@ -1,0 +1,895 @@
+{% extends "base.html" %}
+
+{% block title %}Syllabus{% endblock %}
+
+{% block content %}
+
+<style>
+
+.syllabus-page {
+    padding: 35px 10px 70px;
+}
+
+/* Header */
+
+.syllabus-header {
+    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
+    color: white;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 28px rgba(0,80,180,.22);
+}
+
+.syllabus-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.syllabus-header p {
+    margin: 0;
+    opacity: .9;
+}
+
+
+/* Selection Card */
+
+.selection-card {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    margin-bottom: 30px;
+    box-shadow: 0 7px 22px rgba(0,0,0,.08);
+    border: 1px solid #edf0f5;
+}
+
+.selection-title {
+    color: #173d82;
+    font-size: 21px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 800;
+    color: #263b5e;
+}
+
+.form-select {
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-height: 48px;
+    border: 1px solid #dce3ed;
+}
+
+.form-select:focus {
+    border-color: #167bdc;
+    box-shadow: 0 0 0 3px rgba(22,123,220,.12);
+}
+
+
+/* Syllabus */
+
+.syllabus-card {
+    background: white;
+    border-radius: 22px;
+    padding: 26px;
+    margin-bottom: 20px;
+    box-shadow: 0 7px 22px rgba(0,0,0,.08);
+    border: 1px solid #edf0f5;
+}
+
+.syllabus-card h2 {
+    color: #173d82;
+    font-size: 23px;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.chapter-card {
+    background: #f7faff;
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-left: 5px solid #167bdc;
+}
+
+.chapter-card h4 {
+    font-size: 17px;
+    font-weight: 800;
+    color: #243b62;
+    margin-bottom: 6px;
+}
+
+.chapter-card p {
+    margin: 0;
+    color: #6f7c91;
+    font-size: 13px;
+}
+
+
+/* Back */
+
+.back-btn {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 12px 25px;
+    border-radius: 12px;
+
+    background: white;
+    border: 1px solid #dce4ef;
+
+    color: #173d82;
+    text-decoration: none;
+    font-weight: 800;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.06);
+    transition: .3s;
+}
+
+.back-btn:hover {
+    background: #eef6ff;
+    color: #1674df;
+    transform: translateY(-2px);
+}
+
+
+/* Empty */
+
+.empty-box {
+    background: white;
+    border-radius: 20px;
+    padding: 45px 20px;
+    text-align: center;
+    color: #7a8495;
+    box-shadow: 0 6px 20px rgba(0,0,0,.07);
+}
+
+</style>
+
+
+<div class="container syllabus-page">
+
+
+    <!-- HEADER -->
+
+    <div class="syllabus-header">
+
+        <h1>
+            📚 Syllabus
+        </h1>
+
+        <p>
+            Select your batch and subject to view
+            the complete syllabus.
+        </p>
+
+    </div>
+
+
+    <!-- BATCH -->
+
+    <div class="selection-card">
+
+        <div class="selection-title">
+            🎓 Select Batch
+        </div>
+
+        <select
+            id="batchSelect"
+            class="form-select"
+            onchange="showSubjects()"
+        >
+
+            <option value="">
+                Select Batch
+            </option>
+
+            <option value="JEE 2026">
+                JEE 2026
+            </option>
+
+            <option value="NEET 2026">
+                NEET 2026
+            </option>
+
+            <option value="MHT-CET 2026">
+                MHT-CET 2026
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- SUBJECT -->
+
+    <div
+        class="selection-card"
+        id="subjectBox"
+        style="display:none;"
+    >
+
+        <div class="selection-title">
+            📖 Select Subject
+        </div>
+
+        <select
+            id="subjectSelect"
+            class="form-select"
+            onchange="showSyllabus()"
+        >
+
+            <option value="">
+                Select Subject
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- SYLLABUS RESULT -->
+
+    <div id="syllabusContainer">
+
+        <div class="empty-box">
+
+            📚
+
+            <h3 class="mt-3">
+                Select a batch to begin
+            </h3>
+
+            <p>
+                Choose your batch first, then select
+                a subject to view its syllabus.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <div class="text-center">
+
+        <a
+            href="{{ url_for('learning_hub') }}"
+            class="back-btn"
+        >
+            ← Back to Learning Hub
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+function showSubjects() {
+
+    const batch = document.getElementById("batchSelect").value;
+    const subjectBox = document.getElementById("subjectBox");
+    const subjectSelect = document.getElementById("subjectSelect");
+    const container = document.getElementById("syllabusContainer");
+
+    subjectSelect.innerHTML = `
+        <option value="">Select Subject</option>
+    `;
+
+    container.innerHTML = `
+        <div class="empty-box">
+            📖 Select a subject to view syllabus.
+        </div>
+    `;
+
+    if (batch === "") {
+        subjectBox.style.display = "none";
+        return;
+    }
+
+    subjectBox.style.display = "block";
+
+
+    /* JEE */
+
+    if (batch === "JEE 2026") {
+
+        subjectSelect.innerHTML += `
+            <option value="Mathematics">📐 Mathematics</option>
+            <option value="Physics">⚡ Physics</option>
+            <option value="Chemistry">🧪 Chemistry</option>
+        `;
+
+    }
+
+
+    /* NEET */
+
+    else if (batch === "NEET 2026") {
+
+        subjectSelect.innerHTML += `
+            <option value="Physics">⚡ Physics</option>
+            <option value="Chemistry">🧪 Chemistry</option>
+            <option value="Biology">🧬 Biology</option>
+        `;
+
+    }
+
+
+    /* MHT-CET */
+
+    else if (batch === "MHT-CET 2026") {
+
+        subjectSelect.innerHTML += `
+            <option value="Mathematics">📐 Mathematics</option>
+            <option value="Physics">⚡ Physics</option>
+            <option value="Chemistry">🧪 Chemistry</option>
+        `;
+
+    }
+
+}
+
+
+function showSyllabus() {
+
+    const batch = document.getElementById("batchSelect").value;
+    const subject = document.getElementById("subjectSelect").value;
+    const container = document.getElementById("syllabusContainer");
+
+    if (subject === "") {
+        container.innerHTML = `
+            <div class="empty-box">
+                📖 Select a subject to view syllabus.
+            </div>
+        `;
+        return;
+    }
+
+
+    let chapters = [];
+
+
+    /* =====================================================
+       JEE
+    ===================================================== */
+
+    if (batch === "JEE 2026") {
+
+        if (subject === "Mathematics") {
+
+            chapters = [
+
+                ["1", "Sets, Relations & Functions",
+                 "Sets, relations, functions and basic properties."],
+
+                ["2", "Complex Numbers",
+                 "Complex numbers, Argand plane and algebra of complex numbers."],
+
+                ["3", "Quadratic Equations",
+                 "Roots, nature of roots and quadratic equations."],
+
+                ["4", "Sequences & Series",
+                 "Arithmetic progression, geometric progression and series."],
+
+                ["5", "Permutations & Combinations",
+                 "Fundamental counting principle, permutations and combinations."],
+
+                ["6", "Binomial Theorem",
+                 "Binomial expansion and important properties."],
+
+                ["7", "Matrices & Determinants",
+                 "Matrix operations, determinants and applications."],
+
+                ["8", "Trigonometry",
+                 "Trigonometric ratios, identities and equations."],
+
+                ["9", "Straight Lines",
+                 "Slope, equations of lines and distance formulas."],
+
+                ["10", "Circles",
+                 "Equation of circle and important properties."],
+
+                ["11", "Limits & Continuity",
+                 "Limits, continuity and standard results."],
+
+                ["12", "Differentiation",
+                 "Derivatives and applications of derivatives."],
+
+                ["13", "Integral Calculus",
+                 "Indefinite and definite integration."],
+
+                ["14", "Differential Equations",
+                 "Basic differential equations and their solutions."],
+
+["15", "Probability",
+                 "Basic probability and probability distributions."],
+
+                ["16", "Vector Algebra",
+                 "Vectors, dot product and applications."],
+
+                ["17", "3D Geometry",
+                 "Lines and planes in three-dimensional geometry."]
+
+            ];
+
+        }
+
+
+        else if (subject === "Physics") {
+
+            chapters = [
+
+                ["1", "Units & Measurements",
+                 "Units, dimensions, errors and measurements."],
+
+                ["2", "Kinematics",
+                 "Motion in one and two dimensions."],
+
+                ["3", "Laws of Motion",
+                 "Newton's laws, friction and circular motion."],
+
+                ["4", "Work, Energy & Power",
+                 "Work, kinetic energy, potential energy and power."],
+
+                ["5", "Rotational Motion",
+                 "Torque, angular momentum and rotational dynamics."],
+
+                ["6", "Gravitation",
+                 "Universal gravitation and satellite motion."],
+
+                ["7", "Properties of Matter",
+                 "Mechanical properties of solids and fluids."],
+
+                ["8", "Thermodynamics",
+                 "Heat, temperature and laws of thermodynamics."],
+
+                ["9", "Kinetic Theory",
+                 "Molecular motion and kinetic theory of gases."],
+
+                ["10", "Oscillations",
+                 "Simple harmonic motion and oscillations."],
+
+                ["11", "Waves",
+                 "Wave motion and sound waves."],
+
+                ["12", "Electrostatics",
+                 "Electric charge, electric field and potential."],
+
+                ["13", "Current Electricity",
+                 "Current, resistance and electrical circuits."],
+
+                ["14", "Magnetism",
+                 "Magnetic field and magnetic effects of current."],
+
+                ["15", "Electromagnetic Induction",
+                 "Faraday's law and electromagnetic induction."],
+
+                ["16", "Optics",
+                 "Ray optics and wave optics."],
+
+                ["17", "Modern Physics",
+                 "Atoms, nuclei, dual nature and semiconductor basics."]
+
+            ];
+
+        }
+
+
+        else {
+
+            chapters = [
+
+                ["1", "Some Basic Concepts of Chemistry",
+                 "Mole concept, atomic mass and stoichiometry."],
+
+                ["2", "Atomic Structure",
+                 "Structure of atom and electronic configuration."],
+
+                ["3", "Periodic Table",
+                 "Periodic classification and periodic properties."],
+
+                ["4", "Chemical Bonding",
+                 "Ionic, covalent and molecular bonding."],
+
+                ["5", "Thermodynamics",
+                 "Chemical energy, heat and thermodynamic processes."],
+
+                ["6", "Equilibrium",
+                 "Chemical equilibrium and ionic equilibrium."],
+
+                ["7", "Redox Reactions",
+                 "Oxidation, reduction and redox reactions."],
+
+                   ["8", "Organic Chemistry",
+                 "Basic principles and organic reactions."],
+
+                ["9", "Hydrocarbons",
+                 "Alkanes, alkenes and alkynes."],
+
+                ["10", "Solutions",
+                 "Concentration and properties of solutions."],
+
+                ["11", "Electrochemistry",
+                 "Electrochemical cells and conductivity."],
+
+                ["12", "Chemical Kinetics",
+                 "Rate of chemical reactions."],
+
+                ["13", "Coordination Compounds",
+                 "Coordination compounds and their properties."],
+
+                ["14", "Biomolecules",
+                 "Carbohydrates, proteins, lipids and nucleic acids."]
+
+            ];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NEET
+    ===================================================== */
+
+    else if (batch === "NEET 2026") {
+
+        if (subject === "Biology") {
+
+            chapters = [
+
+                ["1", "The Living World",
+                 "Characteristics and diversity of living organisms."],
+
+                ["2", "Biological Classification",
+                 "Kingdoms and classification of organisms."],
+
+                ["3", "Plant Kingdom",
+                 "Major groups of plants and their characteristics."],
+
+                ["4", "Animal Kingdom",
+                 "Classification and major animal groups."],
+
+                ["5", "Morphology of Flowering Plants",
+                 "Root, stem, leaf, flower and fruit."],
+
+                ["6", "Cell Structure & Function",
+                 "Cell organelles and their functions."],
+
+                ["7", "Biomolecules",
+                 "Proteins, carbohydrates, lipids and nucleic acids."],
+
+                ["8", "Cell Cycle & Cell Division",
+                 "Mitosis, meiosis and cell division."],
+
+                ["9", "Plant Physiology",
+                 "Photosynthesis, respiration and plant growth."],
+
+                ["10", "Human Physiology",
+                 "Digestion, breathing, circulation and excretion."],
+
+                ["11", "Human Reproduction",
+                 "Male and female reproductive systems."],
+
+                ["12", "Reproductive Health",
+                 "Reproductive health and related concepts."],
+
+                ["13", "Genetics & Evolution",
+                 "Inheritance, molecular genetics and evolution."],
+
+                ["14", "Biology and Human Welfare",
+                 "Human health, diseases and immunity."],
+
+                ["15", "Ecology",
+                 "Ecosystems, biodiversity and environmental issues."]
+
+            ];
+
+        }
+
+
+        else if (subject === "Physics") {
+
+            chapters = [
+
+                ["1", "Physical World & Measurements",
+                 "Units, measurements and dimensions."],
+
+                ["2", "Kinematics",
+                 "Motion in one and two dimensions."],
+
+                ["3", "Laws of Motion",
+                 "Newton's laws and their applications."],
+
+                        ["4", "Work, Energy & Power",
+                 "Work, energy and conservation of energy."],
+
+                ["5", "Rotational Motion",
+                 "Torque and rotational dynamics."],
+
+                ["6", "Gravitation",
+                 "Gravitational force and satellite motion."],
+
+                ["7", "Properties of Matter",
+                 "Solids, fluids and their properties."],
+
+                ["8", "Thermodynamics",
+                 "Heat and thermodynamic processes."],
+
+                ["9", "Oscillations & Waves",
+                 "SHM, waves and sound."],
+
+                ["10", "Electrostatics",
+                 "Electric charges, fields and potential."],
+
+                ["11", "Current Electricity",
+                 "Current, resistance and circuits."],
+
+                ["12", "Magnetism",
+                 "Magnetic fields and electromagnetic effects."],
+
+                ["13", "Optics",
+                 "Reflection, refraction and optical instruments."],
+
+                ["14", "Modern Physics",
+                 "Atoms, nuclei and semiconductor devices."]
+
+            ];
+
+        }
+
+
+        else {
+
+            chapters = [
+
+                ["1", "Basic Concepts of Chemistry",
+                 "Mole concept and stoichiometry."],
+
+                ["2", "Structure of Atom",
+                 "Atomic structure and electronic configuration."],
+
+                ["3", "Classification of Elements",
+                 "Periodic table and periodic properties."],
+
+                ["4", "Chemical Bonding",
+                 "Ionic, covalent and molecular bonding."],
+
+                ["5", "Thermodynamics",
+                 "Heat, work and energy changes."],
+
+                ["6", "Equilibrium",
+                 "Chemical and ionic equilibrium."],
+
+                ["7", "Redox Reactions",
+                 "Oxidation and reduction reactions."],
+
+                ["8", "Organic Chemistry",
+                 "Basic organic chemistry and reactions."],
+
+                ["9", "Hydrocarbons",
+                 "Alkanes, alkenes and alkynes."],
+
+                ["10", "Solutions",
+                 "Concentration and solution properties."],
+
+                ["11", "Electrochemistry",
+                 "Electrochemical cells and conductivity."],
+
+                ["12", "Biomolecules",
+                 "Carbohydrates, proteins, lipids and nucleic acids."]
+
+            ];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MHT-CET
+    ===================================================== */
+
+    else if (batch === "MHT-CET 2026") {
+
+        if (subject === "Mathematics") {
+
+            chapters = [
+
+                ["1", "Mathematical Logic",
+                 "Statements, logical operations and truth tables."],
+
+                ["2", "Matrices",
+                 "Matrix operations and applications."],
+
+                ["3", "Trigonometric Functions",
+                 "Trigonometric ratios, identities and equations."],
+
+                ["4", "Pair of Straight Lines",
+                 "Equations and properties of straight lines."],
+
+                ["5", "Circle",
+                 "Equation and properties of circles."],
+
+                ["6", "Conic Sections",
+                 "Parabola, ellipse and hyperbola."],
+
+                ["7", "Vectors",
+                 "Vectors and their applications."],
+
+                ["8", "Three Dimensional Geometry",
+                 "Lines and planes in 3D."],
+
+                ["9", "Differentiation",
+                 "Derivatives and applications."],
+
+                ["10", "Integration",
+                 "Indefinite and definite integration."],
+
+                ["11", "Differential Equations",
+                 "Basic differential equations."],
+
+                ["12", "Probability",
+                 "Probability and related concepts."],
+
+                ["13", "Statistics",
+                 "Measures of dispersion and statistics."]
+
+            ];
+
+        }
+
+
+        else if (subject === "Physics") {
+
+            chapters = [
+
+                ["1", "Rotational Dynamics",
+                 "Torque, angular momentum and rotation."],
+
+                ["2", "Mechanical Properties of Fluids",
+                 "Pressure, viscosity and fluid motion."],
+
+                ["3", "Kinetic Theory of Gases",
+                 "Molecular motion and gas behaviour."],
+
+                ["4", "Thermodynamics",
+                 "Heat and thermodynamic processes."],
+
+                ["5", "Oscillations",
+                 "Simple harmonic motion."],
+
+                ["6", "Superposition of Waves",
+                 "Wave motion and superposition."],
+
+                ["7", "Electrostatics",
+                 "Electric charges, field and potential."],
+
+                ["8", "Current Electricity",
+                 "Current, resistance and electrical circuits."],
+
+                ["9", "Magnetic Fields",
+                 "Magnetic effects and magnetic fields."],
+
+                ["10", "Electromagnetic Induction",
+                 "Faraday's law and induction."],
+
+                ["11", "Semiconductors",
+                 "Semiconductor devices and applications."],
+
+                ["12", "Communication Systems",
+                 "Basic communication principles."]
+
+            ];
+
+        }
+
+
+        else {
+
+            chapters = [
+
+                ["1", "Solid State",
+                 "Crystal structure and properties of solids."],
+
+                ["2", "Solutions",
+                 "Concentration and properties of solutions."],
+
+                ["3", "Chemical Thermodynamics",
+                 "Energy changes in chemical reactions."],
+
+                ["4", "Electrochemistry",
+                 "Electrochemical cells and conductivity."],
+
+                ["5", "Chemical Kinetics",
+                 "Rate of chemical reactions."],
+
+                ["6", "Coordination Compounds",
+                 "Coordination compounds and their properties."],
+
+                ["7", "p-Block Elements",
+                 "Properties and reactions of p-block elements."],
+
+                ["8", "d-Block Elements",
+                 "Transition elements and their compounds."],
+
+                ["9", "Alcohols, Phenols & Ethers",
+                 "Properties and reactions of oxygen-containing organic compounds."],
+
+                ["10", "Aldehydes, Ketones & Carboxylic Acids",
+                 "Important organic reactions and properties."],
+
+                ["11", "Amines",
+                 "Classification, properties and reactions of amines."],
+
+                ["12", "Biomolecules",
+                 "Carbohydrates, proteins, vitamins and nucleic acids."]
+
+            ];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       DISPLAY SYLLABUS
+    ===================================================== */
+
+    let html = `
+
+        <div class="syllabus-card">
+
+            <h2>
+                📚 ${batch} - ${subject}
+            </h2>
+
+            <p class="text-muted mb-4">
+                📖 Complete syllabus and important topics
+            </p>
+
+    `;
+
+
+    chapters.forEach(function(chapter) {
+
+        html += `
+
+            <div class="chapter-card">
+
+                <h4>
+                    ${chapter[0]}. ${chapter[1]}
+                </h4>
+
+                <p>
+                    ${chapter[2]}
+                </p>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+</script>
+
+{% endblock %}

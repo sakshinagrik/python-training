@@ -1,0 +1,426 @@
+{% extends "base.html" %}
+
+{% block title %}Class Tests{% endblock %}
+
+{% block content %}
+
+<style>
+
+.class-test-page {
+    padding: 30px 10px 70px;
+}
+
+/* Header */
+
+.test-header {
+    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
+    color: white;
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 28px rgba(0,80,180,.22);
+}
+
+.test-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.test-header p {
+    margin: 0;
+    opacity: .92;
+}
+
+/* Test Card */
+
+.test-card {
+    background: white;
+    border-radius: 22px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid #edf0f5;
+    box-shadow: 0 7px 22px rgba(0,0,0,.08);
+    transition: .3s;
+    border-left: 6px solid #167bdc;
+}
+
+.test-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0,80,180,.13);
+}
+
+.test-date {
+    background: #eef6ff;
+    color: #123d86;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.test-date .day {
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.test-date .month {
+    font-size: 13px;
+}
+
+/* Details */
+
+.test-card h3 {
+    font-size: 21px;
+    font-weight: 800;
+    color: #172b4d;
+    margin-bottom: 7px;
+}
+
+.test-info {
+    color: #707b8d;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* Badges */
+
+.test-badge {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.upcoming {
+    background: #ddf6e6;
+    color: #218a49;
+}
+
+.online {
+    background: #dcecff;
+    color: #1674df;
+}
+
+.offline {
+    background: #fff0cf;
+    color: #a86a00;
+}
+
+/* Back Button */
+
+.back-btn {
+    border-radius: 12px;
+    padding: 11px 22px;
+    font-weight: 700;
+}
+
+</style>
+
+
+<div class="container class-test-page">
+
+    <!-- HEADER -->
+
+    <div class="test-header">
+
+        <h1>📝 Class Test Schedule</h1>
+
+        <p>
+            Stay updated with your upcoming class tests,
+            subjects and test schedules.
+        </p>
+
+    </div>
+
+
+    <!-- TEST 1 -->
+
+    <div class="test-card">
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-md-2">
+
+                <div class="test-date">
+
+                    <div class="day">15</div>
+
+                    <div class="month">
+                        AUG 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-5">
+
+                <span class="test-badge upcoming">
+                    🟢 Upcoming
+                </span>
+
+                <h3>
+                    📐 Mathematics
+                </h3>
+
+                <div class="test-info">
+                    📚 Batch: JEE 2026
+                </div>
+
+                <div class="test-info">
+                    📝 Type: Chapter Test
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="test-info">
+                    ⏰ Time: 10:00 AM - 11:00 AM
+                </div>
+
+                <span class="test-badge offline">
+                    🏫 Offline
+                </span>
+
+            </div>
+
+
+            <div class="col-md-2 text-md-end">
+
+                <strong class="text-primary">
+                    Test Scheduled
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEST 2 -->
+
+    <div class="test-card">
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-md-2">
+
+                <div class="test-date">
+
+                    <div class="day">18</div>
+
+                    <div class="month">
+                        AUG 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-5">
+
+                <span class="test-badge upcoming">
+                    🟢 Upcoming
+                </span>
+
+                <h3>
+                    ⚡ Physics
+                </h3>
+
+                <div class="test-info">
+                    📚 Batch: MHT-CET 2026
+                </div>
+
+                <div class="test-info">
+                    📝 Type: Unit Test
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="test-info">
+                    ⏰ Time: 11:30 AM - 12:30 PM
+                </div>
+
+                <span class="test-badge online">
+                    💻 Online
+                </span>
+
+            </div>
+
+
+            <div class="col-md-2 text-md-end">
+
+                <strong class="text-primary">
+                    Test Scheduled
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEST 3 -->
+
+    <div class="test-card">
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-md-2">
+
+                <div class="test-date">
+
+                    <div class="day">20</div>
+
+                    <div class="month">
+                        AUG 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-5">
+
+                <span class="test-badge upcoming">
+                    🟢 Upcoming
+                </span>
+
+                <h3>
+                    🧬 Biology
+                </h3>
+
+                <div class="test-info">
+                    📚 Batch: NEET 2026
+                </div>
+
+                <div class="test-info">
+                    📝 Type: Chapter Test
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="test-info">
+                    ⏰ Time: 02:00 PM - 03:00 PM
+                </div>
+
+                <span class="test-badge offline">
+                    🏫 Offline
+                </span>
+
+            </div>
+
+
+            <div class="col-md-2 text-md-end">
+
+                <strong class="text-primary">
+                    Test Scheduled
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEST 4 -->
+
+    <div class="test-card">
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-md-2">
+
+                <div class="test-date">
+
+                    <div class="day">22</div>
+
+                    <div class="month">
+                        AUG 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-5">
+
+                <span class="test-badge upcoming">
+                    🟢 Upcoming
+                </span>
+
+                <h3>
+                    🧪 Chemistry
+                </h3>
+
+                <div class="test-info">
+                    📚 Batch: MHT-CET 2026
+                </div>
+
+                <div class="test-info">
+                    📝 Type: Revision Test
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="test-info">
+                                        ⏰ Time: 09:30 AM - 10:30 AM
+                </div>
+
+                <span class="test-badge offline">
+                    🏫 Offline
+                </span>
+
+            </div>
+
+
+            <div class="col-md-2 text-md-end">
+
+                <strong class="text-primary">
+                    Test Scheduled
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <div class="text-center mt-5">
+
+        <a href="{{ url_for('learning_hub') }}"
+           class="btn btn-outline-primary back-btn">
+
+            ← Back to Learning Hub
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

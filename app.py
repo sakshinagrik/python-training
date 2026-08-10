@@ -36,6 +36,28 @@ class Admin(db.Model):
     name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+class ClassSchedule(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    subject = db.Column(db.String(100), nullable=False)
+    teacher = db.Column(db.String(100), nullable=False)
+
+    class_date = db.Column(db.Date, nullable=False)
+    start_time = db.Column(db.String(20), nullable=False)
+    end_time = db.Column(db.String(20), nullable=False)
+
+    mode = db.Column(db.String(20), nullable=False)  # Online / Offline
+
+    room = db.Column(db.String(100))
+    meeting_link = db.Column(db.String(500))
+
+    topic = db.Column(db.String(200))
+    batch = db.Column(db.String(100))
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
 # Tujhe Junne Routes - Ashech Rahu De
 @app.route('/')
 def home():
@@ -119,6 +141,192 @@ def dashboard():
         paid_fee=paid_fee,
         total_fee=total_fee
     )
+@app.route('/learning_hub')
+def learning_hub():
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    return render_template("learning_hub.html")
+@app.route('/class_schedule')
+def class_schedule():
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    schedules = ClassSchedule.query.order_by(
+        ClassSchedule.class_date.asc(),
+        ClassSchedule.start_time.asc()
+    ).all()
+
+    return render_template(
+        'class_schedule.html',
+        schedules=schedules
+    )
+@app.route('/admin/add_class_schedule', methods=['GET', 'POST'])
+def add_class_schedule():
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    if session.get("role") != "admin":
+        flash("Admin access required.", "danger")
+        return redirect(url_for('class_schedule'))
+
+    if request.method == 'POST':
+
+        schedule = ClassSchedule(
+            subject=request.form['subject'],
+            teacher=request.form['teacher'],
+            class_date=datetime.strptime(
+                request.form['class_date'],
+                '%Y-%m-%d'
+            ).date(),
+            start_time=request.form['start_time'],
+            end_time=request.form['end_time'],
+            mode=request.form['mode'],
+            room=request.form.get('room', ''),
+            meeting_link=request.form.get('meeting_link', ''),
+            topic=request.form.get('topic', ''),
+            batch=request.form.get('batch', '')
+        )
+
+        db.session.add(schedule)
+        db.session.commit()
+
+        flash("✅ Class schedule created successfully!", "success")
+
+        return redirect(url_for('class_schedule'))
+
+    return render_template('add_class_schedule.html')
+@app.route('/admin/edit_class_schedule/<int:id>', methods=['GET', 'POST'])
+def edit_class_schedule(id):
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    if session.get("role") != "admin":
+        flash("Admin access required.", "danger")
+        return redirect(url_for('class_schedule'))
+
+    schedule = ClassSchedule.query.get_or_404(id)
+
+    if request.method == 'POST':
+
+        schedule.subject = request.form['subject']
+        schedule.teacher = request.form['teacher']
+
+        schedule.class_date = datetime.strptime(
+            request.form['class_date'],
+            '%Y-%m-%d'
+        ).date()
+
+        schedule.start_time = request.form['start_time']
+        schedule.end_time = request.form['end_time']
+
+        schedule.mode = request.form['mode']
+
+        schedule.room = request.form.get('room', '')
+        schedule.meeting_link = request.form.get('meeting_link', '')
+
+        schedule.topic = request.form.get('topic', '')
+        schedule.batch = request.form.get('batch', '')
+
+        db.session.commit()
+
+        flash("✅ Class schedule updated successfully!", "success")
+
+        return redirect(url_for('class_schedule'))
+
+    return render_template(
+        'add_class_schedule.html',
+        schedule=schedule
+    )
+@app.route('/admin/delete_class_schedule/<int:id>')
+def delete_class_schedule(id):
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    if session.get("role") != "admin":
+        flash("Admin access required.", "danger")
+        return redirect(url_for('class_schedule'))
+
+    schedule = ClassSchedule.query.get_or_404(id)
+
+    db.session.delete(schedule)
+    db.session.commit()
+
+    flash("✅ Class schedule deleted successfully!", "success")
+
+    return redirect(url_for('class_schedule'))
+@app.route('/live_courses')
+def live_courses():
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    live_classes = ClassSchedule.query.filter_by(
+        mode="Online"
+    ).order_by(
+        ClassSchedule.class_date.asc(),
+        ClassSchedule.start_time.asc()
+    ).all()
+
+    return render_template(
+        "live_course.html",
+        live_classes=live_classes
+    )
+@app.route('/video_courses')
+def video_courses():
+
+    if "user" not in session:
+        flash("Please Login First", "warning")
+        return redirect(url_for('login'))
+
+    return render_template("video_course.html")
+@app.route('/combo_courses')
+def combo_courses():
+    return render_template('combo_courses.html')
+@app.route('/demo_courses')
+def demo_courses():
+    return render_template('demo_courses.html')
+@app.route('/demo_course')
+def demo_course():
+
+    exam = request.args.get('exam')
+
+    if not exam:
+        exam = "MHT-CET"
+
+    return render_template(
+        'demo_course.html',
+        exam=exam
+    )
+@app.route('/class_notes')
+def class_notes():
+    return render_template('class_notes.html')
+@app.route('/syllabus')
+def syllabus():
+    return render_template('syllabus.html')
+@app.route('/class-tests')
+def class_tests():
+    return render_template('class_tests.html')
+@app.route('/performance')
+def performance():
+    return render_template('performance.html')
+@app.route('/progress')
+def progress():
+    return render_template('progress.html')
+@app.route('/achievements')
+def achievements():
+    return render_template('achievements.html')
 @app.route('/students')
 def students():
     return render_template('Student.html', stud=stud)

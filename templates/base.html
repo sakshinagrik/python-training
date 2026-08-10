@@ -224,7 +224,27 @@ box-shadow:0 8px 25px rgba(0,140,255,.3);
                 
                     <a href="{{ url_for('student_list') }}" class="nav-item nav-link {% if request.endpoint == 'student_list' %}active fw-bold{% endif %}">🧑‍🎓&nbsp; Student List</a>
                     <a href="{{ url_for('dashboard') }}" class="nav-link">📊 Dashboard</a>
-                    
+                    <!-- Learning Hub Flash Card -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       id="moreDropdown"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">
+        More
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('learning_hub') }}">
+                🎓 Student Portal
+            </a>
+        </li>
+    </ul>
+</li>
+
                     <div class="nav-item dropdown">
 
     <a href="#" class="nav-link dropdown-toggle"

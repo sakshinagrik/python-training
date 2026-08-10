@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+
+{% block title %}Class Progress{% endblock %}
+
+{% block content %}
+
+<style>
+
+.progress-page {
+    padding: 30px 10px 60px;
+}
+
+/* Header */
+
+.progress-header {
+    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
+    color: white;
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 28px rgba(0,80,180,.20);
+}
+
+.progress-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.progress-header p {
+    margin: 0;
+    opacity: .92;
+}
+
+
+/* Overall Progress */
+
+.overall-card {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 7px 22px rgba(0,0,0,.08);
+    border: 1px solid #edf0f5;
+    margin-bottom: 25px;
+}
+
+.overall-title {
+    color: #172b4d;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.overall-percent {
+    font-size: 42px;
+    font-weight: 900;
+    color: #167bdc;
+}
+
+
+/* Progress Items */
+
+.progress-section {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 7px 22px rgba(0,0,0,.08);
+    border: 1px solid #edf0f5;
+}
+
+.progress-section h2 {
+    color: #172b4d;
+    font-size: 23px;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.progress-item {
+    margin-bottom: 24px;
+}
+
+.progress-item:last-child {
+    margin-bottom: 0;
+}
+
+.progress-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.progress-name span:first-child {
+    color: #263b5e;
+    font-weight: 700;
+}
+
+.progress-name span:last-child {
+    color: #123d86;
+    font-weight: 800;
+}
+
+.progress {
+    height: 13px;
+    background: #e9eef5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.syllabus-bar {
+    width: 68%;
+    background: #167bdc;
+}
+
+.lecture-bar {
+    width: 76%;
+    background: #22a875;
+}
+
+.test-bar {
+    width: 65%;
+    background: #f0a020;
+}
+
+.class-bar {
+    width: 82%;
+    background: #8b63d9;
+}
+
+
+/* Message */
+
+.progress-message {
+    background: #eef6ff;
+    border-left: 5px solid #167bdc;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 25px;
+    color: #23456f;
+}
+
+.progress-message strong {
+    color: #123d86;
+    font-size: 18px;
+}
+
+
+/* Back Button */
+
+.back-btn {
+    border-radius: 12px;
+    padding: 11px 24px;
+    font-weight: 700;
+}
+
+</style>
+
+
+<div class="container progress-page">
+
+
+    <!-- HEADER -->
+
+    <div class="progress-header">
+
+        <h1>📈 Class Progress</h1>
+
+        <p>
+            Track the overall progress of our coaching classes
+            and learning activities.
+        </p>
+
+    </div>
+
+
+    <!-- OVERALL CLASS PROGRESS -->
+
+    <div class="overall-card">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-8">
+
+                <div class="overall-title">
+                    🎓 Overall Class Progress
+                </div>
+
+                <p class="text-muted mt-2 mb-0">
+                    Our coaching classes are progressing steadily
+                    across syllabus, lectures, tests and regular classes.
+                </p>
+
+            </div>
+
+            <div class="col-md-4 text-md-end text-center mt-3 mt-md-0">
+
+                <div class="overall-percent">
+                    75%
+                </div>
+
+                <div class="text-muted">
+                    Overall Progress
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CLASS PROGRESS -->
+
+    <div class="progress-section">
+
+        <h2>
+            📊 Learning Activities
+        </h2>
+
+
+        <!-- Syllabus -->
+
+        <div class="progress-item">
+
+            <div class="progress-name">
+
+                <span>
+                    📚 Syllabus Covered
+                </span>
+
+                <span>
+                    68%
+                    </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div class="progress-bar syllabus-bar"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Lectures -->
+
+        <div class="progress-item">
+
+            <div class="progress-name">
+
+                <span>
+                    🎥 Lectures Completed
+                </span>
+
+                <span>
+                    76%
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div class="progress-bar lecture-bar"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Tests -->
+
+        <div class="progress-item">
+
+            <div class="progress-name">
+
+                <span>
+                    📝 Class Tests Completed
+                </span>
+
+                <span>
+                    65%
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div class="progress-bar test-bar"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Classes -->
+
+        <div class="progress-item">
+
+            <div class="progress-name">
+
+                <span>
+                    🏫 Classes Completed
+                </span>
+
+                <span>
+                    82%
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div class="progress-bar class-bar"></div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="progress-message">
+
+        🎉 <strong>Good Progress!</strong>
+
+        <div class="mt-1">
+            Our coaching classes are progressing well.
+            Students are regularly attending classes and
+            completing their learning activities.
+        </div>
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <div class="text-center mt-5">
+
+        <a href="{{ url_for('learning_hub') }}"
+           class="btn btn-outline-primary back-btn">
+
+            ← Back to Learning Hub
+
+        </a>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

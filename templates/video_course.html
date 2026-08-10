@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Video Courses{% endblock %}
+
+{% block content %}
+
+<style>
+
+.video-page {
+    padding: 30px 10px 60px;
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+    display: inline-block;
+    background: white;
+    color: #173d82;
+    padding: 9px 16px;
+    border-radius: 10px;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid #dce5f2;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+    margin-bottom: 18px;
+}
+
+.back-btn:hover {
+    background: #eef6ff;
+    color: #1267c4;
+}
+
+
+/* HEADER */
+
+.video-header {
+    background: linear-gradient(
+        135deg,
+        #092f78,
+        #167bdc,
+        #35a9e8
+    );
+
+    color: white;
+    border-radius: 22px;
+    padding: 28px 30px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 25px rgba(0,80,180,.18);
+}
+
+.video-header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.video-header p {
+    margin: 0;
+    opacity: .9;
+}
+
+
+/* VIDEO CARD */
+
+.video-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 18px;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,.07);
+
+    border-left: 5px solid #167bdc;
+}
+
+.video-icon {
+    width: 65px;
+    height: 65px;
+
+    border-radius: 15px;
+
+    background: #e5f1ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+}
+
+.video-card h3 {
+    font-size: 19px;
+    font-weight: 800;
+    color: #173d82;
+}
+
+.video-info {
+    font-size: 13px;
+    color: #737d8d;
+    margin: 5px 0;
+}
+
+.watch-btn {
+    display: inline-block;
+
+    background: #167bdc;
+    color: white !important;
+
+    padding: 9px 17px;
+
+    border-radius: 9px;
+
+    text-decoration: none !important;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-top: 10px;
+}
+
+.watch-btn:hover {
+    background: #092f78;
+}
+
+
+/* EMPTY */
+
+.empty-video {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,.07);
+}
+
+.empty-video-icon {
+    font-size: 55px;
+}
+
+.empty-video h3 {
+    margin-top: 15px;
+    font-weight: 800;
+    color: #173d82;
+}
+
+</style>
+
+
+<div class="container video-page">
+
+
+    <!-- BACK -->
+
+    <a
+        href="{{ url_for('learning_hub') }}"
+        class="back-btn"
+    >
+        ← Back to Learning Hub
+    </a>
+
+
+    <!-- HEADER -->
+
+    <div class="video-header">
+
+        <h1>🎥 Video Courses</h1>
+
+        <p>
+            Watch recorded lectures and learn anytime.
+        </p>
+
+    </div>
+
+
+    <!-- VIDEOS -->
+
+    {% if videos %}
+
+        <div class="row">
+
+            {% for video in videos %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="video-card">
+
+                    <div class="video-icon">
+                        ▶️
+                    </div>
+
+                    <h3>
+                        {{ video.subject }}
+                    </h3>
+
+
+                    {% if video.topic %}
+
+                    <div class="video-info">
+                        📖 {{ video.topic }}
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if video.teacher %}
+
+                    <div class="video-info">
+                        👨‍🏫 {{ video.teacher }}
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="video-info">
+
+                        📅
+                        {{ video.class_date.strftime('%d %b %Y') }}
+
+                    </div>
+
+
+                    <a
+                        href="{{ video.recording_url }}"
+                        target="_blank"
+                        class="watch-btn"
+                    >
+                        ▶️ Watch Recording
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+      {% else %}
+
+
+        <!-- NO VIDEOS -->
+
+        <div class="empty-video">
+
+            <div class="empty-video-icon">
+                🎥
+            </div>
+
+            <h3>
+                No Recorded Lectures Yet
+            </h3>
+
+            <p class="text-muted">
+                Recorded lectures will appear here after live classes.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

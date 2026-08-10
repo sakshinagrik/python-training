@@ -1,0 +1,492 @@
+{% extends "base.html" %}
+
+{% block title %}Watch Demo{% endblock %}
+
+{% block content %}
+
+<style>
+
+.demo-course-page {
+    padding: 35px 10px 70px;
+}
+
+.demo-course-header {
+    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
+    color: white;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 28px rgba(0,80,180,.22);
+}
+
+.demo-course-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.demo-course-header p {
+    margin: 0;
+    opacity: .9;
+}
+
+.subject-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    height: 100%;
+    border: 1px solid #e7edf5;
+    box-shadow: 0 7px 22px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+.subject-card:hover {
+transform: translateY(-5px);
+    box-shadow: 0 13px 28px rgba(0,0,0,.12);
+}
+
+.subject-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 29px;
+    margin-bottom: 15px;
+}
+
+.subject-card h3 {
+    color: #172b4d;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 7px;
+}
+
+.subject-card p {
+    color: #747d8d;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.math-icon {
+    background: #e4f0ff;
+}
+
+.physics-icon {
+    background: #fff0d8;
+}
+
+.chemistry-icon {
+    background: #eee5ff;
+}
+
+.biology-icon {
+    background: #ddf6e6;
+}
+
+.watch-btn {
+    display: inline-block;
+    margin-top: 12px;
+
+    padding: 9px 18px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #092f78, #167bdc);
+
+    color: white !important;
+    text-decoration: none !important;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    transition: .25s;
+}
+
+.watch-btn:hover {
+    transform: translateY(-2px);
+    color: white !important;
+}
+
+.back-demo-btn {
+    display: inline-block;
+
+    margin-top: 35px;
+
+    padding: 11px 23px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    border: 1px solid #dce4ef;
+
+    color: #173d82;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    transition: .25s;
+}
+
+.back-demo-btn:hover {
+    background: #eef6ff;
+    color: #1674df;
+}
+
+</style>
+
+
+<div class="container demo-course-page">
+
+
+    <!-- HEADER -->
+
+    <div class="demo-course-header">
+
+        <h1>
+            🎥 {{ exam }} Demo Course
+        </h1>
+
+        <p>
+            Select a subject and watch its demo lecture.
+        </p>
+
+    </div>
+
+
+    <!-- ================= JEE ================= -->
+
+    {% if exam == "JEE" %}
+
+    <div class="row g-4">
+
+        <!-- JEE MATHEMATICS -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon math-icon">
+                    📐
+                </div>
+
+                <h3>
+                    JEE Mathematics
+                </h3>
+
+                <p>
+                    Explore JEE Mathematics demo
+                    lectures and problem-solving.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=JEE+Mathematics+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- JEE PHYSICS -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon physics-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    JEE Physics
+                </h3>
+
+                <p>
+                    Learn important JEE Physics
+                    concepts through demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=JEE+Physics+demo+lecture"
+                     target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- JEE CHEMISTRY -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon chemistry-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    JEE Chemistry
+                </h3>
+
+                <p>
+                    Explore JEE Chemistry concepts
+                    with demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=JEE+Chemistry+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NEET ================= -->
+
+    {% elif exam == "NEET" %}
+
+    <div class="row g-4">
+
+        <!-- NEET PHYSICS -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon physics-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    NEET Physics
+                </h3>
+
+                <p>
+                    Understand NEET Physics concepts
+                    with demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=NEET+Physics+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEET CHEMISTRY -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon chemistry-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    NEET Chemistry
+                </h3>
+
+                <p>
+                    Learn NEET Chemistry concepts
+                    through demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=NEET+Chemistry+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEET BIOLOGY -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon biology-icon">
+                    🧬
+                </div>
+
+                <h3>
+                    NEET Biology
+                </h3>
+
+                <p>
+                    Explore NEET Biology concepts
+                    with demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=NEET+Biology+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MHT-CET ================= -->
+
+    {% else %}
+
+    <div class="row g-4">
+
+        <!-- MHT-CET MATHEMATICS -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon math-icon">
+                    📐
+                </div>
+
+                <h3>
+                    MHT-CET Mathematics
+                </h3>
+
+                <p>
+                    Practice important MHT-CET
+                    Mathematics concepts.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=MHT-CET+Mathematics+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- MHT-CET PHYSICS -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon physics-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    MHT-CET Physics
+                </h3>
+
+                <p>
+                    Learn MHT-CET Physics concepts
+                    through demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=MHT-CET+Physics+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- MHT-CET CHEMISTRY -->
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="subject-card">
+
+                <div class="subject-icon chemistry-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    MHT-CET Chemistry
+                </h3>
+
+                <p>
+                    Explore MHT-CET Chemistry
+                    demo lectures.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=MHT-CET+Chemistry+demo+lecture"
+                    target="_blank"
+                    class="watch-btn"
+                >
+                    ▶️ Watch Demo
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- BACK BUTTON -->
+
+    <div class="text-center">
+
+        <a
+            href="{{ url_for('demo_courses') }}"
+            class="back-demo-btn"
+        >
+            ← Back to Demo Courses
+        </a>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

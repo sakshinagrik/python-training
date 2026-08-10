@@ -174,7 +174,39 @@ margin-top:10px;
 </div>
 
 </div>
+<div class="col-md-4 mb-4">
 
+    <div class="card shadow-sm border-0 rounded-4 h-100">
+
+        <div class="card-body p-4">
+
+            <div style="font-size: 35px;">
+                📅
+            </div>
+
+            <h4 class="fw-bold mt-3">
+                Class Schedule
+            </h4>
+
+            <p class="text-muted">
+                Add and manage online & offline classes.
+            </p>
+
+            <a href="{{ url_for('add_class_schedule') }}"
+               class="btn btn-primary">
+                ➕ Add Class
+            </a>
+
+            <a href="{{ url_for('class_schedule') }}"
+               class="btn btn-outline-primary ms-2">
+                👁️ View
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 </div>
 <div class="card shadow-lg mt-5 p-4"
 style="
@@ -250,8 +282,7 @@ border-radius:20px;
     </table>
 
 </div>
-
-
+    
 <!-- Quick Actions -->
 
 <div class="row mt-5 g-4">

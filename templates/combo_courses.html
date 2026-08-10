@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+
+{% block title %}Combo Courses{% endblock %}
+
+{% block content %}
+
+<style>
+
+.combo-page {
+    padding: 35px 10px 70px;
+}
+
+/* Header */
+
+.combo-header {
+    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
+    color: white;
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 28px rgba(0,80,180,.22);
+}
+
+.combo-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.combo-header p {
+    margin: 0;
+    opacity: .9;
+}
+
+
+/* Course Cards */
+
+.combo-card {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    height: 100%;
+    border: 1px solid #edf0f5;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    transition: .3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.combo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0,80,180,.16);
+}
+
+.combo-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+    margin-bottom: 18px;
+}
+
+.jee-icon {
+    background: #e1efff;
+}
+
+.neet-icon {
+    background: #e2f8e9;
+}
+
+.computer-icon {
+    background: #eee5ff;
+}
+
+.combo-card h2 {
+    font-size: 23px;
+    font-weight: 800;
+    color: #172b4d;
+    margin-bottom: 8px;
+}
+
+.combo-card p {
+    color: #737d8d;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.subject-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.subject-badge {
+    background: #f1f5fa;
+    color: #24446f;
+    border-radius: 20px;
+    padding: 7px 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.view-combo-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #092f78, #167bdc);
+    color: white !important;
+    text-decoration: none;
+
+    padding: 10px 18px;
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    transition: .3s;
+}
+
+.view-combo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(22,123,220,.3);
+}
+
+
+/* Back Button */
+
+.back-schedule-btn {
+    display: inline-block;
+    margin-bottom: 22px;
+
+    border: 1px solid #d8e1ee;
+    background: white;
+    color: #23456f;
+
+    padding: 10px 17px;
+    border-radius: 11px;
+
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+
+    transition: .3s;
+}
+
+.back-schedule-btn:hover {
+    background: #eef6ff;
+    color: #1674df;
+}
+
+</style>
+
+
+<div class="container combo-page">
+
+
+    <!-- BACK BUTTON -->
+
+    <a href="{{ url_for('learning_hub') }}"
+       class="back-schedule-btn">
+
+        ← Back to Learning Hub
+
+    </a>
+
+
+    <!-- HEADER -->
+
+    <div class="combo-header">
+
+        <h1>🎓 Combo Courses</h1>
+
+        <p>
+            Explore combined course packages and study multiple
+            subjects together in one complete program.
+        </p>
+
+    </div>
+
+
+    <!-- COMBO COURSES -->
+
+    <div class="row g-4">
+
+
+        <!-- JEE COMBO -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="combo-card">
+
+                <div class="combo-icon jee-icon">
+                    📚
+                </div>
+
+                <h2>
+                    JEE Complete Combo
+                </h2>
+
+                <p>
+                    Complete preparation package for JEE
+                    with all major subjects.
+                </p>
+
+                <div class="subject-list">
+
+                    <span class="subject-badge">
+                        📐 Mathematics
+                    </span>
+
+                    <span class="subject-badge">
+                        ⚡ Physics
+                    </span>
+
+                    <span class="subject-badge">
+                        🧪 Chemistry
+                    </span>
+
+                </div>
+
+                <a href="#"
+                class="view-combo-btn">
+
+                    View Course →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEET COMBO -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="combo-card">
+
+                <div class="combo-icon neet-icon">
+                    🧬
+                </div>
+
+                <h2>
+                    NEET Complete Combo
+                </h2>
+
+                <p>
+                    Complete NEET preparation package
+                    covering all important subjects.
+                </p>
+
+                <div class="subject-list">
+
+                    <span class="subject-badge">
+                        ⚡ Physics
+                    </span>
+
+                    <span class="subject-badge">
+                        🧪 Chemistry
+                    </span>
+
+                    <span class="subject-badge">
+                        🧬 Biology
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="view-combo-btn">
+
+                    View Course →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- COMPUTER COMBO -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="combo-card">
+
+                <div class="combo-icon computer-icon">
+                    💻
+                </div>
+
+                <h2>
+                    Computer Engineering Combo
+                </h2>
+
+                <p>
+                    Learn important Computer Engineering
+                    subjects together in one package.
+                </p>
+
+                <div class="subject-list">
+
+                    <span class="subject-badge">
+                        💻 Programming
+                    </span>
+
+                    <span class="subject-badge">
+                        🗄️ DBMS
+                    </span>
+
+                    <span class="subject-badge">
+                        ⚙️ Operating System
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="view-combo-btn">
+
+                    View Course →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}

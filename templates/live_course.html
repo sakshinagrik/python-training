@@ -1,0 +1,570 @@
+{% extends "base.html" %}
+
+{% block title %}Live Courses{% endblock %}
+
+{% block content %}
+
+<style>
+
+.live-page {
+    padding: 30px 10px 60px;
+}
+
+/* BACK BUTTON */
+
+.back-schedule-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: white;
+    color: #173d82;
+
+    padding: 9px 16px;
+    border-radius: 10px;
+
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 700;
+
+    border: 1px solid #dce5f2;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+
+    margin-bottom: 18px;
+
+    transition: .2s;
+}
+
+.back-schedule-btn:hover {
+    background: #eef6ff;
+    color: #1267c4;
+    transform: translateX(-2px);
+}
+
+
+/* HEADER */
+
+.live-header {
+    background: linear-gradient(
+        135deg,
+        #092f78,
+        #167bdc,
+        #35a9e8
+    );
+
+    color: white;
+
+    border-radius: 22px;
+
+    padding: 25px 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 8px 25px rgba(0,80,180,.18);
+}
+
+.live-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.live-header p {
+    margin: 0;
+    opacity: .9;
+}
+
+
+/* LIVE CLASS CARD */
+
+.live-class-card {
+    background: white;
+
+    border-radius: 17px;
+
+    padding: 18px 20px;
+
+    margin-bottom: 14px;
+
+    border-left: 5px solid #167bdc;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,.07);
+
+    transition: .2s;
+}
+
+.live-class-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.10);
+}
+
+.live-class-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+
+    color: #173d82;
+
+    margin-bottom: 6px;
+}
+
+.live-info {
+    font-size: 13px;
+    color: #737d8d;
+
+    margin: 4px 0;
+}
+
+.live-time {
+    font-weight: 700;
+    color: #1674df;
+}
+
+
+/* START TIME */
+
+.start-time-box {
+    display: inline-block;
+
+    background: #eef6ff;
+    color: #1267c4;
+
+    padding: 7px 12px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    margin-top: 7px;
+}
+
+
+/* LIVE NOW */
+
+.live-now {
+    display: inline-block;
+
+    background: #e7f7ed;
+    color: #218a49;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    margin-top: 7px;
+}
+
+
+/* JOIN BUTTON */
+
+.join-live-btn {
+    display: inline-block;
+
+    background: #167bdc;
+
+    color: white !important;
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 9px 16px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-decoration: none !important;
+
+    transition: .2s;
+}
+
+.join-live-btn:hover {
+    background: #092f78;
+
+    color: white !important;
+}
+
+
+/* WAIT BUTTON */
+
+.wait-btn {
+    display: inline-block;
+
+    background: #e9eef5;
+
+    color: #718096;
+
+    border-radius: 9px;
+
+    padding: 9px 16px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* NO CLASSES */
+
+.no-live {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.07);
+}
+
+.no-live-icon {
+    font-size: 50px;
+}
+
+.no-live h3 {
+    font-weight: 800;
+    color: #173d82;
+}
+
+</style>
+
+
+<div class="container live-page">
+
+
+    <!-- BACK TO CLASS SCHEDULE -->
+
+   
+    <a
+        href="{{ url_for('learning_hub') }}"
+        class="back-schedule-btn"
+    >
+        ← Back to learning
+    </a>
+
+
+    <!-- HEADER -->
+
+    <div class="live-header">
+
+        <h1>🔴 Live Courses</h1>
+
+        <p>
+            Join your scheduled live online classes.
+        </p>
+
+    </div>
+
+
+    <!-- LIVE CLASSES -->
+
+    {% if live_classes %}
+
+        {% for item in live_classes %}
+
+        <div
+            class="live-class-card live-class-item"
+
+            data-date="{{ item.class_date.strftime('%Y-%m-%d') }}"
+
+            data-time="{{ item.start_time }}"
+        >
+
+            <div class="row align-items-center">
+
+
+                <!-- CLASS DETAILS -->
+
+                <div class="col-md-8">
+                  <h3>
+                        {{ item.subject }}
+                    </h3>
+
+
+                    {% if item.topic %}
+
+                    <div class="live-info">
+                        📖 {{ item.topic }}
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if item.teacher %}
+
+                    <div class="live-info">
+                        👨‍🏫 {{ item.teacher }}
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="live-info">
+
+                        📅
+                        {{ item.class_date.strftime('%d %b %Y') }}
+
+                        &nbsp; | &nbsp;
+
+                        ⏰
+
+                        <span class="live-time">
+
+                            {{ item.start_time }}
+                            -
+                            {{ item.end_time }}
+
+                        </span>
+
+                    </div>
+
+
+                    {% if item.batch %}
+
+                    <div class="live-info">
+                        🎓 {{ item.batch }}
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- STATUS -->
+
+                    <div class="class-status">
+
+                        <span class="start-time-box upcoming-status">
+
+                            ⏳ Lecture starts at
+                            {{ item.start_time }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTION -->
+
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+
+
+                    {% if item.meeting_link %}
+
+
+                        <!-- JOIN BUTTON -->
+
+                        <a
+                            href="{{ item.meeting_link }}"
+                            target="_blank"
+
+                            class="join-live-btn join-button"
+
+                            style="display:none;"
+                        >
+                            ▶️ Join Class
+                        </a>
+
+
+                        <!-- WAITING -->
+
+                        <span class="wait-btn waiting-button">
+
+                            ⏳ Starts Soon
+
+                        </span>
+
+
+                    {% else %}
+
+
+                        <!-- LINK NOT ADDED YET -->
+
+                        <span class="wait-btn">
+
+                            ⏳ Starts at {{ item.start_time }}
+
+                        </span>
+
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- NO LIVE CLASSES -->
+
+        <div class="no-live">
+
+            <div class="no-live-icon">
+                🔴
+            </div>
+
+            <h3 class="mt-3">
+                No Live Classes
+            </h3>
+
+            <p class="text-muted">
+                Your scheduled online classes will appear here.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+/*
+    LIVE CLASS TIME CHECK
+*/
+
+function updateLiveClasses() {
+
+    const now = new Date();
+    const classes =
+        document.querySelectorAll(
+            ".live-class-item"
+        );
+
+
+    classes.forEach(function(card) {
+
+        const date =
+            card.getAttribute("data-date");
+
+        const time =
+            card.getAttribute("data-time");
+
+
+        if (!date || !time) {
+            return;
+        }
+
+
+        /*
+            Convert class date + start time
+            into JavaScript Date
+        */
+
+        const startDate =
+            new Date(
+                date + "T" + time
+            );
+
+
+        const joinButton =
+            card.querySelector(
+                ".join-button"
+            );
+
+
+        const waitingButton =
+            card.querySelector(
+                ".waiting-button"
+            );
+
+
+        const status =
+            card.querySelector(
+                ".class-status"
+            );
+
+
+        /*
+            Lecture started
+        */
+
+        if (now >= startDate) {
+
+
+            /*
+                Show Join Class
+            */
+
+            if (joinButton) {
+
+                joinButton.style.display =
+                    "inline-block";
+
+            }
+
+
+            /*
+                Hide Starts Soon
+            */
+
+            if (waitingButton) {
+
+                waitingButton.style.display =
+                    "none";
+
+            }
+
+
+            /*
+                Show LIVE NOW
+            */
+
+            if (status) {
+
+                status.innerHTML = `
+
+                    <span class="live-now">
+
+                        🔴 LIVE NOW
+
+                    </span>
+
+                `;
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
+
+/*
+    Run when page opens
+*/
+
+updateLiveClasses();
+
+
+/*
+    Check every 30 seconds
+*/
+
+setInterval(
+    updateLiveClasses,
+    30000
+);
+ 
+
+
+{% endblock %}

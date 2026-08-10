@@ -1,0 +1,531 @@
+{% extends "base.html" %}
+
+{% block title %}Add Class Schedule{% endblock %}
+
+{% block content %}
+
+<style>
+
+.add-schedule-page {
+    padding: 35px 10px 70px;
+}
+
+.schedule-form-header {
+    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
+    color: white;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 28px rgba(0,80,180,.25);
+}
+
+.schedule-form-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.schedule-form-header p {
+    margin: 0;
+    opacity: .9;
+}
+
+.schedule-form-card {
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.09);
+    border: 1px solid #edf0f5;
+}
+
+.form-section-title {
+    color: #123d86;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8eef8;
+}
+
+.form-label {
+    font-weight: 700;
+    color: #263b5e;
+    margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    border: 1px solid #dce3ed;
+    padding: 12px 14px;
+    min-height: 48px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #167bdc;
+    box-shadow: 0 0 0 3px rgba(22,123,220,.12);
+}
+
+.create-btn {
+    background: linear-gradient(135deg, #092f78, #167bdc);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 28px;
+    font-weight: 800;
+    transition: .3s;
+}
+
+.create-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22,123,220,.3);
+    color: white;
+}
+
+.cancel-btn {
+    border-radius: 12px;
+    padding: 13px 25px;
+    font-weight: 700;
+}
+
+.schedule-info-box {
+    background: #eef6ff;
+    border-left: 5px solid #167bdc;
+    border-radius: 12px;
+    padding: 15px 18px;
+    color: #23456f;
+    margin-bottom: 25px;
+}
+
+.recording-info {
+    background: #f0f8ff;
+    border: 1px solid #d7eaff;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-top: 8px;
+    color: #31577f;
+    font-size: 13px;
+}
+
+</style>
+
+
+<div class="container add-schedule-page">
+
+    <!-- HEADER -->
+
+    <div class="schedule-form-header">
+
+        <h1>📅 Create a Class Schedule</h1>
+
+        <p>
+            Add and manage upcoming online and offline classes
+            for your students.
+        </p>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+
+    <div class="schedule-form-card">
+
+        <div class="schedule-info-box">
+
+            💡 Fill in the class details below to create a new
+            schedule for your students.
+
+        </div>
+
+
+        <form method="POST">
+
+
+            <!-- BASIC DETAILS -->
+
+            <div class="form-section-title">
+
+                📚 Class Details
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Subject
+                    </label>
+
+                    <select
+                        name="subject"
+                        class="form-select"
+                        required
+                    >
+
+                        <option value="">
+                            Select Subject
+                        </option>
+
+                        <option value="Mathematics">
+                            📐 Mathematics
+                        </option>
+
+                        <option value="Physics">
+                            ⚡ Physics
+                        </option>
+
+                        <option value="Chemistry">
+                            🧪 Chemistry
+                        </option>
+
+                        <option value="Biology">
+                            🧬 Biology
+                        </option>
+
+                        <option value="Computer Science">
+                            💻 Computer Science
+                        </option>
+                        </select>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Teacher
+                    </label>
+
+                    <input
+                        type="text"
+                        name="teacher"
+                        class="form-control"
+                        placeholder="Enter teacher name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Topic
+                    </label>
+
+                    <input
+                        type="text"
+                        name="topic"
+                        class="form-control"
+                        placeholder="Enter lecture topic"
+                    >
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Batch
+                    </label>
+
+                    <select
+                        name="batch"
+                        class="form-select"
+                        required
+                    >
+
+                        <option value="">
+                            Select Batch
+                        </option>
+
+                        <option value="JEE 2026">
+                            JEE 2026
+                        </option>
+
+                        <option value="NEET 2026">
+                            NEET 2026
+                        </option>
+
+                        <option value="MHT-CET 2026">
+                            MHT-CET 2026
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATE & TIME -->
+
+            <div class="form-section-title mt-5">
+
+                🕒 Date & Time
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Class Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="class_date"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        name="start_time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        End Time
+                    </label>
+
+                    <input
+                        type="time"
+                        name="end_time"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+                </div>
+
+
+            <!-- CLASS MODE -->
+
+            <div class="form-section-title mt-5">
+
+                🌐 Class Mode
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Mode
+                    </label>
+
+                    <select
+                        name="mode"
+                        id="mode"
+                        class="form-select"
+                        required
+                        onchange="changeMode()"
+                    >
+
+                        <option value="">
+                            Select Class Mode
+                        </option>
+
+                        <option value="Online">
+                            💻 Online
+                        </option>
+
+                        <option value="Offline">
+                            🏫 Offline
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="col-md-6"
+                    id="roomBox"
+                >
+
+                    <label class="form-label">
+                        Classroom / Room
+                    </label>
+
+                    <input
+                        type="text"
+                        name="room"
+                        class="form-control"
+                        placeholder="Example: Room No. 2"
+                    >
+
+                </div>
+
+
+                <div
+                    class="col-12"
+                    id="meetingBox"
+                    style="display:none;"
+                >
+
+                    <label class="form-label">
+                        🔗 Online Meeting Link
+                    </label>
+
+                    <input
+                        type="url"
+                        name="meeting_link"
+                        class="form-control"
+                        placeholder="https://meet.google.com/..."
+                    >
+
+                    <small class="text-muted">
+
+                        Add the Google Meet / online class link here.
+
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECORDING -->
+
+            <div class="form-section-title mt-5">
+
+                🎥 Class Recording
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <div class="col-12">
+
+                    <label class="form-label">
+
+                        🎥 Recording Link
+
+                    </label>
+
+                    <input
+                        type="url"
+                        name="recording_url"
+                        class="form-control"
+                        placeholder="Paste Google Drive / recording link"
+                    >
+
+                    <div class="recording-info">
+
+                        💡 Live class झाल्यानंतर recording तयार झाल्यावर
+                        त्याची link इथे add करू शकता.
+                        ही recording नंतर <strong>Video Courses</strong>
+                        मध्ये दाखवता येईल.
+                       </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="text-center mt-5 pt-3">
+
+                <button
+                    type="submit"
+                    class="create-btn"
+                >
+
+                    ➕ Create Class Schedule
+
+                </button>
+
+
+                <a
+                    href="{{ url_for('class_schedule') }}"
+                    class="btn btn-outline-secondary cancel-btn ms-2"
+                >
+
+                    ← Back to Schedule
+
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function changeMode() {
+
+    const mode =
+        document.getElementById("mode").value;
+
+    const roomBox =
+        document.getElementById("roomBox");
+
+    const meetingBox =
+        document.getElementById("meetingBox");
+
+
+    if (mode === "Online") {
+
+        roomBox.style.display = "none";
+
+        meetingBox.style.display = "block";
+
+    }
+
+    else if (mode === "Offline") {
+
+        roomBox.style.display = "block";
+
+        meetingBox.style.display = "none";
+
+    }
+
+    else {
+
+        roomBox.style.display = "block";
+
+        meetingBox.style.display = "none";
+
+    }
+
+}
+
+</script>
+
+
+{% endblock %}
