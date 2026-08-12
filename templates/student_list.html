@@ -1,7 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
+.table-responsive table {
+    min-width: 1000px;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .card-body {
+        padding: 8px;
+    }
+
+    .table-responsive table {
+        font-size: 13px;
+    }
+
+    .table-responsive th,
+    .table-responsive td {
+        white-space: nowrap;
+        padding: 8px;
+        vertical-align: middle;
+    }
+
+    .table-responsive img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .table-responsive .btn {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}
+</style>
 <div class="container mt-4">
 
 <form method="GET" action="{{ url_for('student_list') }}" class="mb-3">
@@ -106,7 +149,7 @@ onclick="return confirm('Are you sure you want to delete this student?')">
 </tbody>
 
 </table>
-
+</div>
 <!-- Pagination -->
 <div class="d-flex justify-content-center mt-4">
 

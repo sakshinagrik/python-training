@@ -1,492 +1,980 @@
 {% extends "base.html" %}
 
-{% block title %}Performance{% endblock %}
+{% block title %}Class Performance{% endblock %}
 
 {% block content %}
 
 <style>
 
-.performance-page {
-    padding: 30px 10px 70px;
-}
+    body {
+        background: #f6f9fc;
+    }
 
-/* Header */
+    .performance-page {
+        min-height: 100vh;
+        padding: 30px;
+    }
 
-.performance-header {
-    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
-    color: white;
-    border-radius: 24px;
-    padding: 32px;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 28px rgba(0,80,180,.22);
-}
+    /* HEADER */
+    .performance-header {
+        background: linear-gradient(135deg, #0b347d, #1687d9);
+        color: white;
+        border-radius: 24px;
+        padding: 28px 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 25px rgba(20,70,130,.15);
+    }
 
-.performance-header h1 {
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
 
-.performance-header p {
-    margin: 0;
-    opacity: .92;
-}
+    .header-icon {
+        width: 65px;
+        height: 65px;
+        border-radius: 18px;
+        background: rgba(255,255,255,.18);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 32px;
+    }
+
+    .performance-header h1 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .performance-header p {
+        margin: 6px 0 0;
+        font-size: 14px;
+        opacity: .9;
+    }
 
 
-/* Main Card */
+    /* TOP SECTION */
 
-.performance-main-card {
-    background: white;
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.08);
-    border: 1px solid #edf0f5;
-    margin-bottom: 28px;
-}
+    .top-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.7fr;
+        gap: 22px;
+        margin-bottom: 22px;
+    }
+
+    .box {
+        background: white;
+        border-radius: 22px;
+        padding: 25px;
+        box-shadow: 0 6px 20px rgba(30,70,110,.08);
+    }
+
+    .box-title {
+        color: #16345f;
+        font-size: 19px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
 
 
-/* Rating */
+    /* OVERALL PERFORMANCE */
 
-.rating-circle {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
+    .overall {
+        text-align: center;
+    }
 
-    background:
-        conic-gradient(
-            #167bdc 0deg 306deg,
-            #e8eef6 306deg 360deg
+    .score-circle {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+
+        background:
+            conic-gradient(
+                #1677d2 0deg 288deg,
+                #e7edf4 288deg 360deg
+            );
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 5px auto 18px;
+
+        position: relative;
+    }
+
+    .score-circle::before {
+        content: "";
+
+        position: absolute;
+
+        width: 116px;
+        height: 116px;
+
+        background: white;
+        border-radius: 50%;
+    }
+
+    .score-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    .score-text strong {
+        display: block;
+        font-size: 34px;
+        color: #17345e;
+    }
+
+    .score-text span {
+        font-size: 12px;
+        color: #7b8798;
+    }
+
+    .excellent {
+        color: #1677d2;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .overall-small {
+        color: #7a8799;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+
+    /* PERFORMANCE TREND */
+
+    .trend-box {
+        background: linear-gradient(
+            135deg,
+            #eaf7ff,
+            #dff2ff
         );
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        border: 1px solid #cceaff;
+    }
 
-    margin: 10px auto;
-}
+    .trend-area {
+        height: 220px;
+        position: relative;
+        overflow: hidden;
+    }
 
-.rating-inner {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: white;
+    .grid-line {
+        position: absolute;
+        left: 0;
+        right: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
+        height: 1px;
 
-.rating-number {
-    font-size: 32px;
-    font-weight: 900;
-    color: #123d86;
-}
+        background: rgba(55,130,190,.14);
+    }
 
-.rating-text {
-    font-size: 12px;
-    color: #7b8494;
-}
+    .line1 {
+        top: 20%;
+    }
 
+    .line2 {
+        top: 40%;
+    }
 
-/* Performance Cards */
+    .line3 {
+        top: 60%;
+    }
 
-.performance-card {
-    background: white;
-    border-radius: 20px;
-    padding: 22px;
-    border: 1px solid #edf0f5;
-    box-shadow: 0 7px 22px rgba(0,0,0,.07);
-    height: 100%;
-    transition: .3s;
-}
+    .line4 {
+        top: 80%;
+    }
 
-.performance-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(0,0,0,.11);
-}
+    .trend-svg {
+        position: absolute;
 
-.performance-icon {
-    width: 52px;
-    height: 52px;
+        width: 100%;
+        height: 100%;
 
-    border-radius: 15px;
+        left: 0;
+        top: 0;
+    }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .trend-labels {
+        display: flex;
+        justify-content: space-between;
 
-    font-size: 25px;
+        color: #61748d;
+        font-size: 12px;
 
-    margin-bottom: 14px;
-}
-
-.blue-icon {
-    background: #dcecff;
-}
-
-.green-icon {
-    background: #ddf6e6;
-}
-
-.orange-icon {
-    background: #fff0cf;
-}
-
-.purple-icon {
-    background: #eee4ff;
-}
-
-.performance-card h3 {
-    font-size: 21px;
-    font-weight: 900;
-    color: #172b4d;
-    margin-bottom: 5px;
-}
-
-.performance-card p {
-    color: #7b8494;
-    font-size: 13px;
-    margin: 0;
-}
+        margin-top: 7px;
+    }
 
 
-/* Status */
+    /* SUMMARY */
 
-.status-box {
-    background: #eef6ff;
-    border-left: 5px solid #167bdc;
-    border-radius: 14px;
+    .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 17px;
 
-    padding: 18px 20px;
+        margin-bottom: 22px;
+    }
 
-    color: #23456f;
-}
+    .summary-card {
+        background: white;
 
-.status-title {
-    font-size: 20px;
-    font-weight: 900;
-    color: #123d86;
-}
+        border-radius: 18px;
+        padding: 20px;
+
+        box-shadow: 0 6px 18px rgba(30,70,110,.07);
+
+        transition: .25s;
+    }
+
+    .summary-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .summary-icon {
+        font-size: 27px;
+        margin-bottom: 8px;
+    }
+
+    .summary-card h3 {
+        margin: 0;
+
+        font-size: 15px;
+        color: #68768b;
+    }
+
+    .summary-value {
+        font-size: 28px;
+        font-weight: 750;
+
+        color: #123b7c;
+
+        margin-top: 5px;
+    }
+
+    .summary-card p {
+        margin: 3px 0 0;
+
+        color: #8a95a5;
+        font-size: 12px;
+    }
 
 
-/* Strength */
+    /* BATCH PERFORMANCE */
 
-.strength-card {
-    background: linear-gradient(135deg, #f7fbff, #eef6ff);
-    border-radius: 20px;
+    .batch-box {
+        margin-bottom: 22px;
+    }
 
-    padding: 25px;
+    .batch-grid {
+        display: grid;
 
-    border: 1px solid #dcecff;
-}
+        grid-template-columns: repeat(3,1fr);
 
-.strength-card h3 {
-    font-size: 21px;
-    font-weight: 900;
-    color: #172b4d;
-}
+        gap: 18px;
+    }
 
-.strength-item {
-    background: white;
-    border-radius: 12px;
-    padding: 12px 15px;
-    margin-top: 10px;
-    color: #42526b;
-    font-weight: 600;
-}
+    .batch-card {
+        background: #fbfdff;
+
+        border: 1px solid #e7edf4;
+
+        border-radius: 17px;
+
+        padding: 20px;
+
+        transition: .25s;
+    }
+
+    .batch-card:hover {
+        transform: translateY(-4px);
+
+        box-shadow: 0 8px 20px rgba(20,70,120,.08);
+    }
+
+    .batch-icon {
+        width: 50px;
+        height: 50px;
+
+        border-radius: 14px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
+
+        font-size: 23px;
+
+        margin-bottom: 12px;
+    }
+
+    .neet {
+        background: #16a36a;
+    }
+
+    .jee {
+        background: #2878d7;
+    }
+
+    .mhtcet {
+        background: #f28a20;
+    }
+
+    .batch-card h3 {
+        margin: 0;
+
+        color: #18365f;
+
+        font-size: 18px;
+    }
+
+    .batch-score {
+        font-size: 29px;
+
+        font-weight: 750;
+
+        color: #1268bd;
+
+        margin: 7px 0;
+    }
+
+    .batch-card p {
+        margin: 0 0 12px;
+
+        color: #7c8798;
+
+        font-size: 12px;
+    }
+
+    .batch-bar {
+        height: 9px;
+
+        background: #e8edf3;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+    }
+
+    .batch-fill {
+        height: 100%;
+
+        border-radius: 20px;
+    }
+
+    .neet-fill {
+        width: 84%;
+        background: #16a36a;
+    }
+
+    .jee-fill {
+        width: 79%;
+        background: #2878d7;
+    }
+
+    .mhtcet-fill {
+        width: 82%;
+        background: #f28a20;
+    }
 
 
-/* Back Button */
+    /* TEST PERFORMANCE */
 
-.back-btn {
-    border-radius: 12px;
-    padding: 12px 25px;
-    font-weight: 700;
-}
+    .test-box {
+        margin-bottom: 22px;
+    }
+
+    .test-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3,1fr);
+
+        gap: 18px;
+    }
+
+    .test-card {
+        background: linear-gradient(
+            135deg,
+            #f8fbff,
+            #eef8ff
+        );
+
+        border: 1px solid #e3eef8;
+
+        border-radius: 17px;
+
+        padding: 20px;
+    }
+
+    .test-icon {
+        font-size: 27px;
+        margin-bottom: 8px;
+    }
+
+    .test-card h3 {
+        margin: 0;
+
+        color: #203b62;
+
+        font-size: 16px;
+    }
+
+    .test-score {
+        font-size: 29px;
+
+        font-weight: 750;
+
+        color: #1677d2;
+
+        margin-top: 6px;
+    }
+
+    .test-card p {
+        margin: 3px 0 0;
+
+        color: #7c8798;
+
+        font-size: 12px;
+    }
+
+
+    /* MESSAGE */
+
+    .message {
+        background: linear-gradient(
+            135deg,
+            #ffffff,
+            #eef8ff
+        );
+
+        border-radius: 18px;
+
+        padding: 21px 24px;
+
+        box-shadow: 0 6px 18px rgba(30,70,110,.06);
+
+        margin-bottom: 25px;
+    }
+
+    .message h3 {
+        margin: 0;
+
+        color: #1265d8;
+    }
+
+    .message p {
+        margin: 6px 0 0;
+
+        color: #68778d;
+
+        font-size: 14px;
+    }
+
+
+    /* BACK BUTTON */
+
+    .back-area {
+        text-align: center;
+
+        padding: 5px 0 25px;
+    }
+
+    .back-btn {
+        display: inline-block;
+
+        padding: 11px 25px;
+
+        background: white;
+
+        color: #123b9c;
+
+        text-decoration: none;
+
+        font-weight: 650;
+
+        border-radius: 12px;
+
+        box-shadow: 0 5px 15px rgba(0,0,0,.10);
+
+        transition: .25s;
+    }
+
+    .back-btn:hover {
+        background: #123b9c;
+
+        color: white;
+
+        transform: translateY(-2px);
+    }
+
+
+    /* MOBILE */
+
+    @media(max-width:900px) {
+
+        .top-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .summary-grid {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .batch-grid,
+        .test-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    @media(max-width:600px) {
+
+        .performance-page {
+            padding: 15px;
+        }
+
+        .performance-header {
+            padding: 22px;
+        }
+
+        .performance-header h1 {
+            font-size: 23px;
+        }
+
+        .header-icon {
+            width: 52px;
+            height: 52px;
+            font-size: 25px;
+        }
+
+        .summary-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .box {
+            padding: 20px;
+        }
+    }
 
 </style>
 
 
-<div class="container performance-page">
+<div class="performance-page">
 
 
     <!-- HEADER -->
 
     <div class="performance-header">
 
-        <h1>📊 Student Performance</h1>
+        <div class="header-content">
 
-        <p>
-            Check your overall learning performance,
-            consistency and achievements.
-        </p>
-
-    </div>
-
-
-    <!-- MAIN PERFORMANCE -->
-
-    <div class="performance-main-card">
-
-        <div class="row align-items-center g-4">
-
-
-            <!-- RATING -->
-
-            <div class="col-md-5 text-center">
-
-                <h3 class="fw-bold text-dark">
-                    Overall Performance
-                </h3>
-
-                <div class="rating-circle">
-
-                    <div class="rating-inner">
-
-                        <div class="rating-number">
-<div class="rating-number">
-                            85%
-                        </div>
-
-                        <div class="rating-text">
-                            Performance
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <h4 class="fw-bold text-success">
-                    Excellent Performance! 🎉
-                </h4>
-
-                <p class="text-muted">
-                    Keep up the great work and continue learning.
-                </p>
-
+            <div class="header-icon">
+                📊
             </div>
 
+            <div>
 
-            <!-- STATUS -->
-
-            <div class="col-md-7">
-
-                <div class="status-box">
-
-                    <div class="status-title">
-                        🌟 Your Current Status
-                    </div>
-
-                    <p class="mt-2 mb-0">
-                        You are maintaining good consistency
-                        in your learning journey.
-                        Keep attending classes regularly
-                        and continue practicing.
-                    </p>
-
-                </div>
-
-
-                <div class="row g-3 mt-3">
-
-
-                    <div class="col-sm-6">
-
-                        <div class="performance-card">
-
-                            <div class="performance-icon blue-icon">
-                                🎯
-                            </div>
-
-                            <h3>
-                                85%
-                            </h3>
-
-                            <p>
-                                Goal Achievement
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-sm-6">
-
-                        <div class="performance-card">
-
-                            <div class="performance-icon green-icon">
-                                🔥
-                            </div>
-
-                            <h3>
-                                Very Good
-                            </h3>
-
-                            <p>
-                                Learning Consistency
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- PERFORMANCE SUMMARY -->
-
-    <div class="row g-4">
-
-
-        <div class="col-12 col-sm-6 col-lg-3">
-
-            <div class="performance-card">
-
-                <div class="performance-icon blue-icon">
-                    ⭐
-                </div>
-
-                <h3>
-                    4.5 / 5
-                </h3>
+                <h1>Class Performance</h1>
 
                 <p>
-                    Overall Rating
+                    Track the overall academic performance of our coaching class.
                 </p>
 
             </div>
 
         </div>
 
+    </div>
 
-        <div class="col-12 col-sm-6 col-lg-3">
 
-            <div class="performance-card">
+    <!-- OVERALL + TREND -->
 
-                <div class="performance-icon green-icon">
+    <div class="top-grid">
+
+
+        <!-- OVERALL -->
+
+        <div class="box overall">
+
+            <div class="box-title">
+                🏆 Overall Class Performance
+            </div>
+
+
+            <div class="score-circle">
+
+                <div class="score-text">
+
+                    <strong>80%</strong>
+
+                    <span>Average Score</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="excellent">
+                Excellent Performance! 🎉
+            </div>
+
+            <div class="overall-small">
+                The class is showing steady academic progress.
+            </div>
+
+        </div>
+
+
+        <!-- PERFORMANCE TREND -->
+
+        <div class="box trend-box">
+
+            <div class="box-title">
+                📈 Performance Trend
+            </div>
+
+
+            <div class="trend-area">
+
+                <div class="grid-line line1"></div>
+                <div class="grid-line line2"></div>
+                <div class="grid-line line3"></div>
+                <div class="grid-line line4"></div>
+
+
+                <svg
+                    class="trend-svg"
+                    viewBox="0 0 700 220"
+                    preserveAspectRatio="none">
+
+                    <polyline
+                        points="20,175 130,145 240,158 350,105 460,120 570,62 680,78"
+                        fill="none"
+                        stroke="#1677d2"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+
+                    <circle cx="20" cy="175" r="7" fill="#1677d2"/>
+                    <circle cx="130" cy="145" r="7" fill="#1677d2"/>
+                    <circle cx="240" cy="158" r="7" fill="#1677d2"/>
+                    <circle cx="350" cy="105" r="7" fill="#1677d2"/>
+                    <circle cx="460" cy="120" r="7" fill="#1677d2"/>
+                    <circle cx="570" cy="62" r="7" fill="#1677d2"/>
+                    <circle cx="680" cy="78" r="7" fill="#1677d2"/>
+
+                </svg>
+
+            </div>
+
+
+            <div class="trend-labels">
+
+                <span>Test 1</span>
+                <span>Test 2</span>
+                <span>Test 3</span>
+                <span>Test 4</span>
+                <span>Test 5</span>
+                <span>Test 6</span>
+                <span>Test 7</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary-grid">
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                👨‍🎓
+            </div>
+
+            <h3>Total Students</h3>
+
+            <div class="summary-value">
+                120
+            </div>
+
+            <p>
+                Students enrolled
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                📝
+            </div>
+
+            <h3>Tests Conducted</h3>
+
+            <div class="summary-value">
+                30
+            </div>
+
+            <p>
+                Tests completed
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ⭐
+            </div>
+
+            <h3>Class Average</h3>
+
+            <div class="summary-value">
+                80%
+            </div>
+
+            <p>
+                Overall average score
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🏆
+            </div>
+
+            <h3>Highest Score</h3>
+
+            <div class="summary-value">
+                94%
+            </div>
+
+            <p>
+                Best class performance
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- BATCH PERFORMANCE -->
+
+    <div class="box batch-box">
+
+        <div class="box-title">
+            📚 Batch-wise Performance
+        </div>
+
+
+        <div class="batch-grid">
+
+
+            <!-- NEET -->
+
+            <div class="batch-card">
+
+                <div class="batch-icon neet">
+                    🧬
+                </div>
+
+                <h3>NEET</h3>
+
+                <div class="batch-score">
+                    84%
+                </div>
+
+                <p>
+                    Average batch performance
+                </p>
+
+                <div class="batch-bar">
+
+                    <div class="batch-fill neet-fill"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- JEE -->
+
+            <div class="batch-card">
+
+                <div class="batch-icon jee">
+                    ⚙️
+                </div>
+
+                <h3>JEE</h3>
+
+                <div class="batch-score">
+                    79%
+                </div>
+
+                <p>
+                    Average batch performance
+                </p>
+
+                <div class="batch-bar">
+
+                    <div class="batch-fill jee-fill"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MHT-CET -->
+
+            <div class="batch-card">
+
+                <div class="batch-icon mhtcet">
+                    🎯
+                </div>
+
+                <h3>MHT-CET</h3>
+
+                <div class="batch-score">
+                    82%
+                </div>
+
+                <p>
+                    Average batch performance
+                </p>
+
+                <div class="batch-bar">
+
+                    <div class="batch-fill mhtcet-fill"></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- TEST PERFORMANCE -->
+
+    <div class="box test-box">
+
+        <div class="box-title">
+            📝 Recent Test Performance
+        </div>
+
+
+        <div class="test-grid">
+
+
+            <div class="test-card">
+
+                <div class="test-icon">
+                    📘
+                </div>
+
+                <h3>Unit Test</h3>
+
+                <div class="test-score">
+                    82%
+                </div>
+
+                <p>
+                    Class average
+                </p>
+
+            </div>
+
+
+            <div class="test-card">
+
+                <div class="test-icon">
                     📚
                 </div>
 
-                <h3>
-                    Advanced
-                </h3>
+                <h3>Monthly Test</h3>
 
-                <p>
-                    Learning Level
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-12 col-sm-6 col-lg-3">
-
-            <div class="performance-card">
-
-                <div class="performance-icon orange-icon">
-                    📈
+                <div class="test-score">
+                    76%
                 </div>
 
-                <h3>
-                    Improving
-                </h3>
-
                 <p>
-                    Current Learning Status
+                    Class average
                 </p>
 
             </div>
 
-        </div>
 
+            <div class="test-card">
 
-        <div class="col-12 col-sm-6 col-lg-3">
-
-            <div class="performance-card">
-
-                <div class="performance-icon purple-icon">
-                    🏆
+                <div class="test-icon">
+                    🎯
                 </div>
 
-                <h3>
-                    Excellent
-                </h3>
+                <h3>Mock Test</h3>
+
+                <div class="test-score">
+                    85%
+                </div>
 
                 <p>
-                    Overall Achievement
+                    Class average
                 </p>
 
             </div>
+
 
         </div>
 
     </div>
 
 
-    <!-- STRENGTH -->
+    <!-- MESSAGE -->
 
-    <div class="strength-card mt-4">
+    <div class="message">
 
         <h3>
-            💡 Learning Strengths
+            🎯 Keep Improving!
         </h3>
 
-        <p class="text-muted">
-            Your current learning highlights
+        <p>
+            The class is showing strong academic performance.
+            Regular practice, tests and consistent learning can
+            help improve the overall results further.
         </p>
 
-
-        <div class="strength-item">
-            ✅ Regular class participation
-        </div>
-
-        <div class="strength-item">
-            📚 Good learning consistency
-        </div>
-
-        <div class="strength-item">
-            🎯 Strong focus towards academic goals
-        </div>
-
-        <div class="strength-item">
-            🚀 Continuous improvement in learning
-        </div>
-
     </div>
 
 
-    <!-- MOTIVATION -->
+    <!-- BACK BUTTON -->
 
-    <div class="status-box mt-4">
+    <div class="back-area">
 
-        🎉 <strong>Keep Going!</strong>
+        <a
+            href="{{ url_for('learning_hub') }}"
+            class="back-btn">
 
-        <div class="mt-1">
-            Stay consistent with your classes and
-            keep improving your skills every day.
-        </div>
-
-    </div>
-
-
-    <!-- BACK TO LEARNING HUB -->
-
-    <div class="text-center mt-5">
-
-        <a href="{{ url_for('learning_hub') }}"
-           class="btn btn-outline-primary back-btn">
-
-            ← Back to Learning Hub
+            ← Back to Student Learning Hub
 
         </a>
 

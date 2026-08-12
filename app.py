@@ -327,6 +327,9 @@ def progress():
 @app.route('/achievements')
 def achievements():
     return render_template('achievements.html')
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 @app.route('/students')
 def students():
     return render_template('Student.html', stud=stud)

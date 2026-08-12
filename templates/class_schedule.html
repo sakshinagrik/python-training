@@ -5,745 +5,351 @@
 {% block content %}
 
 <style>
-
-.schedule-page {
-    padding: 30px 10px 60px;
-}
-
-.schedule-header {
-    background: linear-gradient(135deg, #092f78, #167bdc, #35a9e8);
-    color: white;
-    border-radius: 24px;
-    padding: 32px;
-    margin-bottom: 28px;
-    box-shadow: 0 10px 28px rgba(0,80,180,.22);
-}
-
-.schedule-header h1 {
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.schedule-header p {
-    margin: 0;
-}
-
-
-/* Progress */
-
-.progress-box,
-.graph-box,
-.stat-card {
-    background: white;
-    border-radius: 22px;
-    padding: 24px;
-    box-shadow: 0 7px 22px rgba(0,0,0,.08);
-    border: 1px solid #edf0f5;
-}
-
-.progress-box h3,
-.graph-box h3 {
-    font-size: 21px;
-font-weight: 800;
-    color: #172b4d;
-}
-
-.progress-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-
-    background:
-        conic-gradient(
-            #167bdc 0deg 252deg,
-            #e9eef5 252deg 360deg
-        );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin: 20px auto;
-}
-
-.progress-circle-inner {
-    width: 116px;
-    height: 116px;
-    border-radius: 50%;
-    background: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.progress-number {
-    font-size: 29px;
-    font-weight: 900;
-    color: #123d86;
-}
-
-.progress-label {
-    font-size: 12px;
-    color: #7a8495;
-}
-
-
-/* Graph */
-
-.graph {
-    height: 210px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-    gap: 12px;
-
-    padding: 10px 5px 0;
-
-    border-bottom: 2px solid #e7ebf1;
-}
-
-.graph-column {
-    height: 100%;
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.graph-bar {
-    width: 28px;
-    border-radius: 9px 9px 3px 3px;
-}
-
-.bar-mon { height:65%; background:#5b8def; }
-.bar-tue { height:82%; background:#9b6df0; }
-.bar-wed { height:48%; background:#22b8a7; }
-.bar-thu { height:92%; background:#f5a623; }
-.bar-fri { height:72%; background:#ef668d; }
-.bar-sat { height:58%; background:#4db6e8; }
-.bar-sun { height:35%; background:#8ccf72; }
-
-.graph-day {
-    margin-top: 9px;
-    font-size: 12px;
-    color: #747d8d;
-    font-weight: 700;
-}
-
-
-/* Stats */
-
-.stat-card {
-    padding: 20px;
-}
-
-.stat-icon {
-    width: 50px;
-    height: 50px;
-
-    border-radius: 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 25px;
-
-    margin-bottom: 12px;
-}
-
-.stat-card h4 {
-    font-size: 25px;
-    font-weight: 900;
-    margin: 0;
-}
-
-.stat-card p {
-    margin: 4px 0 0;
-    color: #7b8494;
-    font-size: 13px;
-}
-
-.blue-icon { background:#dcecff; }
-.green-icon { background:#ddf6e6; }
-.orange-icon { background:#fff0cf; }
-.purple-icon { background:#eee4ff; }
-
-
-/* Schedule */
-
-.schedule-section-title {
-    margin: 35px 0 18px;
-}
-
-.schedule-section-title h2 {
-    font-size: 25px;
-    font-weight: 900;
-    color: #172b4d;
-}
-
-.schedule-card {
-    background: white;
-    border-radius: 20px;
-
-    padding: 22px;
-
-    margin-bottom: 16px;
-
-    box-shadow: 0 6px 20px rgba(0,0,0,.07);
-
-    border-left: 6px solid #167bdc;
-}
-
-.schedule-card.offline {
-    border-left-color: #28a866;
-}
-
-.schedule-date {
-    font-weight: 900;
-    font-size: 17px;
-    color: #173d82;
-}
-
-.schedule-time {
-    color: #7b8494;
-    font-size: 13px;
-}
-
-.schedule-card h4 {
-    font-size: 19px;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.schedule-info {
-    color: #737d8d;
-    font-size: 14px;
-}
-
-.mode-online,
-.mode-offline {
-    display: inline-block;
-
-    padding: 7px 13px;
-
-    border-radius: 20px;
-
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.mode-online {
-    background: #dcecff;
-    color: #1674df;
-}
-
-.mode-offline {
- background: #ddf6e6;
-    color: #26934d;
-}
-
-.join-btn {
-    border-radius: 10px;
-    padding: 9px 17px;
-    font-weight: 700;
-}
-
-
-/* Recording */
-
-.recording-btn {
-    display: inline-block;
-
-    margin-top: 8px;
-
-    background: #eef6ff;
-    color: #1674df !important;
-
-    border: 1px solid #cfe3ff;
-
-    border-radius: 9px;
-
-    padding: 7px 12px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    text-decoration: none !important;
-}
-
-.recording-btn:hover {
-    background: #167bdc;
-    color: white !important;
-}
-
-.recording-available {
-    color: #218a49;
-    font-size: 12px;
-    font-weight: 700;
-    margin-top: 7px;
-}
-
-
-/* Empty */
-
-.empty-schedule {
-    background: white;
-    border-radius: 20px;
-
-    padding: 45px 20px;
-
-    text-align: center;
-
-    box-shadow: 0 6px 20px rgba(0,0,0,.07);
-}
-
-.empty-schedule h3 {
-    font-weight: 800;
-}
-
+    body {
+        background: linear-gradient(135deg, #eaf7ff, #d8f0ff);
+    }
+
+    .schedule-container {
+        padding: 30px;
+    }
+
+    /* Header */
+    .schedule-header {
+        background: linear-gradient(135deg, #123b9c, #239ed9);
+        color: white;
+        border-radius: 25px;
+        padding: 28px 32px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .schedule-header h1 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .schedule-header p {
+        margin: 8px 0 0;
+        opacity: 0.95;
+    }
+
+    /* Create button */
+    .create-area {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .create-btn {
+        display: inline-block;
+        background: #123b9c;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(18,59,156,0.20);
+        transition: 0.3s;
+    }
+
+    .create-btn:hover {
+        background: #0d2d7c;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Schedule cards */
+    .schedule-card {
+        background: white;
+        border-radius: 20px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+        border-left: 5px solid #239ed9;
+    }
+
+    .schedule-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .subject {
+        color: #123b9c;
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+    .mode {
+        padding: 6px 13px;
+        border-radius: 20px;
+        background: #e8f6ff;
+        color: #0878bd;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .schedule-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .info-box {
+        background: #f6fbff;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .info-box small {
+        display: block;
+        color: #7b8794;
+        margin-bottom: 4px;
+    }
+
+    .info-box strong {
+        color: #263654;
+    }
+
+    .schedule-actions {
+        margin-top: 18px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        padding: 8px 15px;
+        border-radius: 9px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .edit-btn {
+        background: #e8f3ff;
+        color: #1265d8;
+    }
+
+    .delete-btn {
+        background: #ffe9ec;
+        color: #d6334c;
+    }
+
+    /* Empty schedule */
+    .empty-box {
+        background: white;
+        border-radius: 20px;
+        padding: 45px 20px;
+        text-align: center;
+        color: #68748a;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .empty-box .icon {
+        font-size: 45px;
+        margin-bottom: 10px;
+    }
+
+    /* Back button */
+    .back-area {
+        text-align: center;
+        margin-top: 35px;
+        margin-bottom: 10px;
+    }
+
+    .back-btn {
+        display: inline-block;
+        background: white;
+        color: #123b9c;
+        padding: 11px 22px;
+        border-radius: 11px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+        transition: 0.3s;
+    }
+
+    .back-btn:hover {
+        background: #123b9c;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 700px) {
+
+        .schedule-container {
+            padding: 15px;
+        }
+
+        .schedule-info {
+            grid-template-columns: 1fr;
+        }
+
+        .schedule-top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .create-area {
+            text-align: center;
+        }
+    }
 </style>
 
 
-<div class="container schedule-page">
+<div class="schedule-container">
 
-
-    <!-- HEADER -->
-
+    <!-- Header -->
     <div class="schedule-header">
-
         <h1>📅 Class Schedule</h1>
-
         <p>
-            Manage your classes, track your learning progress
-            and stay updated with your daily schedule.
+            View and manage your class schedule
         </p>
+    </div>
+
+
+    <!-- Create Class Schedule Button -->
+    <div class="create-area">
+
+        <a href="{{ url_for('add_class_schedule') }}"
+           class="create-btn">
+
+            ➕ Create Class Schedule
+
+        </a>
 
     </div>
 
 
-    <!-- PROGRESS + GRAPH -->
-
-    <div class="row g-4">
-
-
-        <div class="col-lg-4">
-
-            <div class="progress-box">
-
-                <h3>📈 Overall Progress</h3>
-
-                <div class="progress-circle">
-
-                    <div class="progress-circle-inner">
-
-                        <div class="progress-number">
-                            70%
-                        </div>
-
-                        <div class="progress-label">
-                            Completed
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="text-center">
-
-                    <strong>
-                        Great Progress! 🎉
-                    </strong>
-
-                    <p class="text-muted small mt-1 mb-0">
-                        Keep attending your classes regularly.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-lg-8">
-
-            <div class="graph-box">
-
-                <h3>📊 Weekly Learning Activity</h3>
-
-                <div class="graph">
-
-
-                    <div class="graph-column">
-                        <div class="graph-bar bar-mon"></div>
-                        <div class="graph-day">Mon</div>
-                    </div>
-
-
-                    <div class="graph-column">
-                        <div class="graph-bar bar-tue"></div>
-                        <div class="graph-day">Tue</div>
-                    </div>
-
-
-                    <div class="graph-column">
-                        <div class="graph-bar bar-wed"></div>
-                        <div class="graph-day">Wed</div>
-                    </div>
-
-
-                    <div class="graph-column">
-                        <div class="graph-bar bar-thu"></div>
-                        <div class="graph-day">Thu</div>
-                    </div>
-
-
-                    <div class="graph-column">
-                         <div class="graph-bar bar-fri"></div>
-                        <div class="graph-day">Fri</div>
-                    </div>
-
-
-                    <div class="graph-column">
-                        <div class="graph-bar bar-sat"></div>
-                        <div class="graph-day">Sat</div>
-                    </div>
-
-
-                    <div class="graph-column">
-                        <div class="graph-bar bar-sun"></div>
-                        <div class="graph-day">Sun</div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- QUICK STATS -->
-
-    <div class="row g-4 mt-1">
-
-
-        <div class="col-6 col-lg-3">
-
-            <div class="stat-card">
-
-                <div class="stat-icon blue-icon">
-                    📚
-                </div>
-
-                <h4>{{ schedules|length }}</h4>
-
-                <p>Total Scheduled Classes</p>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-6 col-lg-3">
-
-            <div class="stat-card">
-
-                <div class="stat-icon green-icon">
-                    ✅
-                </div>
-
-                <h4>18</h4>
-
-                <p>Classes Completed</p>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-6 col-lg-3">
-
-            <div class="stat-card">
-
-                <div class="stat-icon orange-icon">
-                    ⏳
-                </div>
-
-                <h4>{{ schedules|length }}</h4>
-
-                <p>Upcoming Classes</p>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-6 col-lg-3">
-
-            <div class="stat-card">
-
-                <div class="stat-icon purple-icon">
-                    ⭐
-                </div>
-
-                <h4>92%</h4>
-
-                <p>Attendance</p>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- TITLE -->
-
-    <div class="schedule-section-title">
-
-        <h2>
-            🗓️ Upcoming Classes
-        </h2>
-
-        <p>
-            Your scheduled online and offline classes
-        </p>
-
-    </div>
-
-
-    <!-- DATABASE SCHEDULES -->
+    <!-- Schedule List -->
 
     {% if schedules %}
 
+        {% for schedule in schedules %}
 
-        {% for item in schedules %}
+        <div class="schedule-card">
+
+            <div class="schedule-top">
+
+                <div class="subject">
+                    📚 {{ schedule.subject }}
+                </div>
+
+                <div class="mode">
+                    {{ schedule.mode }}
+                </div>
+
+            </div>
 
 
-        <div class="schedule-card
-            {% if item.mode == 'Offline' %}
-                offline
-            {% endif %}
-        ">
+            <div class="schedule-info">
 
+                <div class="info-box">
+                    <small>👨‍🏫 Teacher</small>
+                    <strong>{{ schedule.teacher }}</strong>
+                </div>
 
-            <div class="row align-items-center g-3">
+                <div class="info-box">
+                    <small>📅 Date</small>
+                    <strong>{{ schedule.class_date }}</strong>
+                </div>
 
-
-                <!-- DATE -->
-
-                <div class="col-md-2">
-
-                    <div class="schedule-date">
-
-                        {{ item.class_date.strftime('%d %b') }}
-
-                    </div>
-
-                    <div class="schedule-time">
-
-                        {{ item.start_time }}
+                <div class="info-box">
+                    <small>⏰ Time</small>
+                    <strong>
+                        {{ schedule.start_time }}
                         -
-                        {{ item.end_time }}
-
-                    </div>
-
+                        {{ schedule.end_time }}
+                    </strong>
                 </div>
 
-
-                <!-- SUBJECT -->
-
-                <div class="col-md-4">
-
-                    <h4>
-                        {{ item.subject }}
-                    </h4>
-
-
-                    {% if item.topic %}
-
-                    <div class="schedule-info">
-
-                        📖 {{ item.topic }}
-                                            </div>
-
-                    {% endif %}
-
-
-                    {% if item.teacher %}
-
-                    <div class="schedule-info">
-
-                        👨‍🏫 {{ item.teacher }}
-
-                    </div>
-
-                    {% endif %}
-
-
-                    {% if item.batch %}
-
-                    <div class="schedule-info">
-
-                        🎓 {{ item.batch }}
-
-                    </div>
-
-                    {% endif %}
-
-
-                    <!-- RECORDING -->
-
-                    {% if item.recording_url %}
-
-                    <div>
-
-                        <a
-                            href="{{ item.recording_url }}"
-                            target="_blank"
-                            class="recording-btn"
-                        >
-                            🎥 Watch Recording
-                        </a>
-
-                    </div>
-
-                    {% endif %}
-
-
+                <div class="info-box">
+                    <small>🏫 Room</small>
+                    <strong>
+                        {{ schedule.room or 'Online' }}
+                    </strong>
                 </div>
 
-
-                <!-- MODE -->
-
-                <div class="col-md-2">
-
-
-                    {% if item.mode == 'Online' %}
-
-                        <span class="mode-online">
-                            💻 Online
-                        </span>
-
-                    {% else %}
-
-                        <span class="mode-offline">
-                            🏫 Offline
-                        </span>
-
-                    {% endif %}
-
-
+                <div class="info-box">
+                    <small>📖 Topic</small>
+                    <strong>
+                        {{ schedule.topic or 'Not specified' }}
+                    </strong>
                 </div>
 
-
-                <!-- LOCATION -->
-
-                <div class="col-md-2">
-
-
-                    {% if item.mode == 'Online' %}
-
-                        <div class="schedule-info">
-                            🌐 Live Class
-                        </div>
-
-                    {% elif item.room %}
-
-                        <div class="schedule-info">
-                            📍 {{ item.room }}
-                        </div>
-
-                    {% else %}
-
-                        <div class="schedule-info">
-                            📍 Classroom
-                        </div>
-
-                    {% endif %}
-
-
+                <div class="info-box">
+                    <small>🎓 Batch</small>
+                    <strong>
+                        {{ schedule.batch or 'All Batches' }}
+                    </strong>
                 </div>
 
-
-                <!-- ACTION -->
-
-                <div class="col-md-2 text-md-end">
+            </div>
 
 
-                    {% if item.mode == 'Online'
-                          and item.meeting_link %}
+            <!-- Admin Actions -->
 
+            {% if session.get("role") == "admin" %}
 
-                        <a
-                            href="{{ item.meeting_link }}"
-                            target="_blank"
-                            class="btn btn-primary join-btn"
-                        >
-                            Join Class
-                        </a>
+            <div class="schedule-actions">
 
+                <a href="{{ url_for('edit_class_schedule',
+                                    id=schedule.id) }}"
+                   class="edit-btn">
 
-                    {% elif item.mode == 'Offline' %}
+                    ✏️ Edit
 
+                </a>
 
-                        <button
-                            class="btn btn-secondary join-btn"
-                            disabled
-                        >
-                            Classroom
-                        </button>
+                <a href="{{ url_for('delete_class_schedule',
+                                    id=schedule.id) }}"
+                   class="delete-btn"
+                   onclick="return confirm('Are you sure you want to delete this schedule?');">
 
+                    🗑️ Delete
 
-                    {% else %}
+                </a>
 
+            </div>
 
-                        <button
-                            class="btn btn-secondary join-btn"
-                            disabled
-                        >
-                            Details
-                        </button>
+            {% endif %}
 
-
-                    {% endif %}
-
-                </div> <!-- action column -->
-
-            </div> <!-- row -->
-
-        </div> <!-- schedule-card -->
+        </div>
 
         {% endfor %}
 
     {% else %}
 
-        <div class="empty-schedule">
+        <div class="empty-box">
 
-            <div style="font-size:45px;">
-                📅
-            </div>
+            <div class="icon">📅</div>
 
-            <h3>No Classes Scheduled</h3>
+            <h3>No Class Schedule Available</h3>
 
-            <p class="text-muted">
-                There are currently no upcoming classes.
+            <p>
+                Create a class schedule to display it here.
             </p>
 
         </div>
 
     {% endif %}
 
-</div> <!-- container -->
+
+    <!-- Back to Learning Hub -->
+    <div class="back-area">
+
+        <a href="{{ url_for('learning_hub') }}"
+           class="back-btn">
+
+            ← Back to Learning Hub
+
+        </a>
+
+    </div>
+
+</div>
 
 {% endblock %}

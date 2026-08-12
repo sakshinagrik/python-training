@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<style>
+    .profile-page {
+        min-height: 100vh;
+        padding: 35px;
+        background: linear-gradient(135deg, #eaf7ff, #d9f0ff);
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #123b9c, #239ed9);
+        color: white;
+        border-radius: 25px;
+        padding: 30px 35px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .profile-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .profile-header p {
+        margin: 8px 0 0;
+        opacity: 0.95;
+    }
+
+    .profile-card {
+        max-width: 850px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+    }
+
+    .profile-top {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #e8edf4;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #176ed1, #55b9ee);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 50px;
+        box-shadow: 0 5px 15px rgba(23, 110, 209, 0.25);
+    }
+
+    .profile-name h2 {
+        margin: 0;
+        color: #172b5c;
+        font-size: 28px;
+    }
+
+    .profile-name p {
+        margin: 7px 0;
+        color: #68748a;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 6px 13px;
+        border-radius: 20px;
+        background: #e8f3ff;
+        color: #1265d8;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .info-title {
+        margin-top: 28px;
+        margin-bottom: 18px;
+        color: #172b5c;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .info-box {
+        background: #f6faff;
+        border: 1px solid #e4edf7;
+        border-radius: 14px;
+        padding: 17px;
+    }
+
+    .info-box span {
+        display: block;
+        color: #7b879b;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .info-box strong {
+        color: #263654;
+        font-size: 15px;
+    }
+
+    .project-box {
+        background: linear-gradient(135deg, #eef7ff, #f7fbff);
+        border-radius: 15px;
+        padding: 20px;
+        border-left: 5px solid #1265d8;
+    }
+
+    .project-box h3 {
+        margin: 0 0 8px;
+        color: #1265d8;
+    }
+
+    .project-box p {
+        margin: 0;
+        color: #58667d;
+        line-height: 1.6;
+    }
+
+    .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tech {
+        background: #eaf4ff;
+        color: #1265d8;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .back-area {
+        text-align: center;
+        margin-top: 28px;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 11px 22px;
+        background: #1265d8;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .back-btn:hover {
+        background: #0d4fa8;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 650px) {
+        .profile-page {
+            padding: 15px;
+        }
+
+        .profile-card {
+            padding: 22px;
+        }
+
+        .profile-top {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-header h1 {
+            font-size: 26px;
+        }
+    }
+</style>
+
+
+<div class="profile-page">
+
+    <!-- Header -->
+    <div class="profile-header">
+        <h1>👤 Profile</h1>
+        <p>Student Learning Hub Profile</p>
+    </div>
+
+
+    <!-- Profile Card -->
+    <div class="profile-card">
+
+        <!-- Profile Top -->
+        <div class="profile-top">
+
+            <div class="profile-photo">
+                👤
+            </div>
+
+            <div class="profile-name">
+                <h2>Sakshi Nagrik</h2>
+                <p>Diploma in Computer Engineering</p>
+
+                <span class="badge">
+                    🎓 Internship Project
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- Basic Information -->
+        <div class="info-title">
+            📋 Basic Information
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+                <span>Name</span>
+                <strong>Sakshi Nagrik</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Course</span>
+                <strong>Diploma in Computer Engineering</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Year</span>
+                <strong>Third Year</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Project Type</span>
+                <strong>Internship Project</strong>
+            </div>
+
+        </div>
+
+
+        <!-- Project Information -->
+        <div class="info-title">
+            💻 Project Information
+        </div>
+
+        <div class="project-box">
+
+            <h3>Student Learning Hub</h3>
+
+            <p>
+                A coaching class management and student learning website
+                developed as an internship project. The website provides
+                learning resources, courses, syllabus, class tests,
+                achievements, class progress and other useful sections
+                through a simple and professional interface.
+            </p>
+
+        </div>
+
+
+        <!-- Technologies -->
+        <div class="info-title">
+            🛠️ Technologies Used
+        </div>
+
+        <div class="tech-list">
+
+            <span class="tech">Python</span>
+            <span class="tech">Flask</span>
+            <span class="tech">HTML</span>
+            <span class="tech">CSS</span>
+            <span class="tech">JavaScript</span>
+            <span class="tech">Bootstrap</span>
+            <span class="tech">SQLite</span>
+
+        </div>
+
+
+        <!-- Back Button -->
+        <div class="back-area">
+
+            <a href="{{ url_for('learning_hub') }}" class="back-btn">
+                ← Back to Student Learning Hub
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
