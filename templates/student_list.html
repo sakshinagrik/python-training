@@ -2,44 +2,62 @@
 
 {% block content %}
 <style>
-.table-responsive {
+.student-table-wrapper {
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
-.table-responsive table {
+.student-table {
     min-width: 1000px;
+    margin-bottom: 0;
+}
+
+.student-table th,
+.student-table td {
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 @media (max-width: 768px) {
 
     .container {
-        padding-left: 8px;
-        padding-right: 8px;
+        max-width: 100% !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
     }
 
     .card-body {
-        padding: 8px;
+        padding: 8px !important;
     }
 
-    .table-responsive table {
+    .student-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .student-table {
+        min-width: 1000px;
         font-size: 13px;
     }
 
-    .table-responsive th,
-    .table-responsive td {
+    .student-table th,
+    .student-table td {
         white-space: nowrap;
-        padding: 8px;
+        padding: 8px !important;
         vertical-align: middle;
     }
 
-    .table-responsive img {
+    .student-table img {
         width: 40px !important;
         height: 40px !important;
     }
 
-    .table-responsive .btn {
+    .student-table .btn {
         font-size: 12px;
         padding: 5px 8px;
     }
@@ -69,8 +87,9 @@ value="{{ search if search else '' }}">
 
 <div class="card-body">
 
-<table class="table table-info table-bordered table-striped table-hover shadow">
+<div class="student-table-wrapper">
 
+<table class="table table-info table-bordered table-striped table-hover shadow student-table">
 <thead>
 
 <tr>
